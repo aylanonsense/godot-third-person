@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=3 uid="uid://csxholeufkeh5"]
+
+[ext_resource type="Script" path="res://player_character.gd" id="1_ksgeo"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_gb58h"]
+radius = 0.25
+height = 1.0
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_fl14g"]
+radius = 0.25
+height = 1.0
+
+[node name="PlayerCharacter" type="CharacterBody3D"]
+script = ExtResource("1_ksgeo")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("CapsuleShape3D_gb58h")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+mesh = SubResource("CapsuleMesh_fl14g")
+
+[node name="LookPivot" type="Node3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+
+[node name="SpringArm3D" type="SpringArm3D" parent="LookPivot"]
+spring_length = 3.0
+
+[node name="Camera3D" type="Camera3D" parent="LookPivot/SpringArm3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3)
