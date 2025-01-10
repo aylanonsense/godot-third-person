@@ -11,6 +11,8 @@ radius = 0.25
 height = 1.0
 
 [node name="PlayerCharacter" type="CharacterBody3D"]
+floor_stop_on_slope = false
+floor_constant_speed = true
 script = ExtResource("1_ksgeo")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -21,13 +23,15 @@ shape = SubResource("CapsuleShape3D_gb58h")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 mesh = SubResource("CapsuleMesh_fl14g")
 
-[node name="LookPivot" type="Node3D" parent="."]
+[node name="LookYawPivot" type="Node3D" parent="."]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
 
-[node name="Camera3D" type="Camera3D" parent="LookPivot"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3)
+[node name="LookPitchPivot" type="Node3D" parent="LookYawPivot"]
+unique_name_in_owner = true
 
-[node name="SpringArm3D" type="SpringArm3D" parent="LookPivot"]
-visible = false
+[node name="SpringArm3D" type="SpringArm3D" parent="LookYawPivot/LookPitchPivot"]
 spring_length = 3.0
+
+[node name="Camera3D" type="Camera3D" parent="LookYawPivot/LookPitchPivot/SpringArm3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3)
