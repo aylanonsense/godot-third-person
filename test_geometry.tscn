@@ -1,0 +1,1178 @@
+[gd_scene load_steps=2 format=3 uid="uid://s2ctfk2kgp7b"]
+
+[ext_resource type="Material" uid="uid://bhhdcyyq7wud8" path="res://test_grid.tres" id="1_7tch0"]
+
+[node name="TestGeometry" type="Node3D"]
+
+[node name="OriginLabel" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.001, 0)
+shaded = true
+text = "Origin"
+font_size = 60
+outline_size = 5
+
+[node name="Floor" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+material_override = ExtResource("1_7tch0")
+use_collision = true
+size = Vector3(50, 1, 50)
+
+[node name="Ramps" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -3)
+
+[node name="RampPivot1" type="Node3D" parent="Ramps"]
+transform = Transform3D(1, 0, 0, 0, 0.984808, -0.173648, 0, 0.173648, 0.984808, 0, 0, 0)
+
+[node name="Ramp" type="CSGBox3D" parent="Ramps/RampPivot1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, -4.5)
+material_override = ExtResource("1_7tch0")
+use_collision = true
+size = Vector3(2, 1, 10)
+
+[node name="Label" type="Label3D" parent="Ramps/RampPivot1/Ramp"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.501, 4)
+shaded = true
+text = "10°"
+font_size = 60
+outline_size = 5
+
+[node name="RampPivot2" type="Node3D" parent="Ramps"]
+transform = Transform3D(1, 0, 0, 0, 0.939693, -0.34202, 0, 0.34202, 0.939693, 2, 0, 0)
+
+[node name="Ramp" type="CSGBox3D" parent="Ramps/RampPivot2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, -4.5)
+material_override = ExtResource("1_7tch0")
+use_collision = true
+size = Vector3(2, 1, 10)
+
+[node name="Label" type="Label3D" parent="Ramps/RampPivot2/Ramp"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.501, 4)
+shaded = true
+text = "20°"
+font_size = 60
+outline_size = 5
+
+[node name="RampPivot3" type="Node3D" parent="Ramps"]
+transform = Transform3D(1, 0, 0, 0, 0.866025, -0.5, 0, 0.5, 0.866025, 4, 0, 0)
+
+[node name="Ramp" type="CSGBox3D" parent="Ramps/RampPivot3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, -4.5)
+material_override = ExtResource("1_7tch0")
+use_collision = true
+size = Vector3(2, 1, 10)
+
+[node name="Label" type="Label3D" parent="Ramps/RampPivot3/Ramp"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.501, 4)
+shaded = true
+text = "30°"
+font_size = 60
+outline_size = 5
+
+[node name="RampPivot4" type="Node3D" parent="Ramps"]
+transform = Transform3D(1, 0, 0, 0, 0.766044, -0.642788, 0, 0.642788, 0.766044, 6, 0, 0)
+
+[node name="Ramp" type="CSGBox3D" parent="Ramps/RampPivot4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, -4.5)
+material_override = ExtResource("1_7tch0")
+use_collision = true
+size = Vector3(2, 1, 10)
+
+[node name="Label" type="Label3D" parent="Ramps/RampPivot4/Ramp"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.501, 4)
+shaded = true
+text = "40°"
+font_size = 60
+outline_size = 5
+
+[node name="RampPivot5" type="Node3D" parent="Ramps"]
+transform = Transform3D(1, 0, 0, 0, 0.642788, -0.766044, 0, 0.766044, 0.642788, 8, 0, 0)
+
+[node name="Ramp" type="CSGBox3D" parent="Ramps/RampPivot5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, -4.5)
+material_override = ExtResource("1_7tch0")
+use_collision = true
+size = Vector3(2, 1, 10)
+
+[node name="Label" type="Label3D" parent="Ramps/RampPivot5/Ramp"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.501, 4)
+shaded = true
+text = "50°"
+font_size = 60
+outline_size = 5
+
+[node name="RampPivot6" type="Node3D" parent="Ramps"]
+transform = Transform3D(1, 0, 0, 0, 0.5, -0.866025, 0, 0.866025, 0.5, 10, 0, 0)
+
+[node name="Ramp" type="CSGBox3D" parent="Ramps/RampPivot6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, -4.5)
+material_override = ExtResource("1_7tch0")
+use_collision = true
+size = Vector3(2, 1, 10)
+
+[node name="Label" type="Label3D" parent="Ramps/RampPivot6/Ramp"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.501, 4)
+shaded = true
+text = "60°"
+font_size = 60
+outline_size = 5
+
+[node name="RampPivot7" type="Node3D" parent="Ramps"]
+transform = Transform3D(1, 0, 0, 0, 0.34202, -0.939693, 0, 0.939693, 0.34202, 12, 0, 0)
+
+[node name="Ramp" type="CSGBox3D" parent="Ramps/RampPivot7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, -4.5)
+material_override = ExtResource("1_7tch0")
+use_collision = true
+size = Vector3(2, 1, 10)
+
+[node name="Label" type="Label3D" parent="Ramps/RampPivot7/Ramp"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.501, 4)
+shaded = true
+text = "70°"
+font_size = 60
+outline_size = 5
+
+[node name="RampPivot8" type="Node3D" parent="Ramps"]
+transform = Transform3D(1, 0, 0, 0, 0.173648, -0.984808, 0, 0.984808, 0.173648, 14, 0, 0)
+
+[node name="Ramp" type="CSGBox3D" parent="Ramps/RampPivot8"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, -4.5)
+material_override = ExtResource("1_7tch0")
+use_collision = true
+size = Vector3(2, 1, 10)
+
+[node name="Label" type="Label3D" parent="Ramps/RampPivot8/Ramp"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.501, 4)
+shaded = true
+text = "80°"
+font_size = 60
+outline_size = 5
+
+[node name="Steps" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -3)
+
+[node name="TenthSteps" type="Node3D" parent="Steps"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+
+[node name="Step1" type="CSGBox3D" parent="Steps/TenthSteps"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+material_override = ExtResource("1_7tch0")
+use_collision = true
+size = Vector3(2, 0.1, 2)
+
+[node name="Label" type="Label3D" parent="Steps/TenthSteps/Step1"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.051, 0)
+shaded = true
+text = "0.1"
+font_size = 60
+outline_size = 5
+
+[node name="Step2" type="CSGBox3D" parent="Steps/TenthSteps"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, -2)
+material_override = ExtResource("1_7tch0")
+use_collision = true
+size = Vector3(2, 0.2, 2)
+
+[node name="Label" type="Label3D" parent="Steps/TenthSteps/Step2"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.101, 0)
+shaded = true
+text = "0.2"
+font_size = 60
+outline_size = 5
+
+[node name="Step3" type="CSGBox3D" parent="Steps/TenthSteps"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15, -4)
+material_override = ExtResource("1_7tch0")
+use_collision = true
+size = Vector3(2, 0.3, 2)
+
+[node name="Label" type="Label3D" parent="Steps/TenthSteps/Step3"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.151, 0)
+shaded = true
+text = "0.3"
+font_size = 60
+outline_size = 5
+
+[node name="Step4" type="CSGBox3D" parent="Steps/TenthSteps"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, -6)
+material_override = ExtResource("1_7tch0")
+use_collision = true
+size = Vector3(2, 0.4, 2)
+
+[node name="Label" type="Label3D" parent="Steps/TenthSteps/Step4"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.201, 0)
+shaded = true
+text = "0.4"
+font_size = 60
+outline_size = 5
+
+[node name="Step5" type="CSGBox3D" parent="Steps/TenthSteps"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, -8)
+material_override = ExtResource("1_7tch0")
+use_collision = true
+size = Vector3(2, 0.5, 2)
+
+[node name="Label" type="Label3D" parent="Steps/TenthSteps/Step5"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.251, 0)
+shaded = true
+text = "0.5"
+font_size = 60
+outline_size = 5
+
+[node name="Step6" type="CSGBox3D" parent="Steps/TenthSteps"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, -10)
+material_override = ExtResource("1_7tch0")
+use_collision = true
+size = Vector3(2, 0.6, 2)
+
+[node name="Label" type="Label3D" parent="Steps/TenthSteps/Step6"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.301, 0)
+shaded = true
+text = "0.6"
+font_size = 60
+outline_size = 5
+
+[node name="Step7" type="CSGBox3D" parent="Steps/TenthSteps"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.35, -12)
+material_override = ExtResource("1_7tch0")
+use_collision = true
+size = Vector3(2, 0.7, 2)
+
+[node name="Label" type="Label3D" parent="Steps/TenthSteps/Step7"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.351, 0)
+shaded = true
+text = "0.7"
+font_size = 60
+outline_size = 5
+
+[node name="Step8" type="CSGBox3D" parent="Steps/TenthSteps"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, -14)
+material_override = ExtResource("1_7tch0")
+use_collision = true
+size = Vector3(2, 0.8, 2)
+
+[node name="Label" type="Label3D" parent="Steps/TenthSteps/Step8"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.401, 0)
+shaded = true
+text = "0.8"
+font_size = 60
+outline_size = 5
+
+[node name="Step9" type="CSGBox3D" parent="Steps/TenthSteps"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, -16)
+material_override = ExtResource("1_7tch0")
+use_collision = true
+size = Vector3(2, 0.9, 2)
+
+[node name="Label" type="Label3D" parent="Steps/TenthSteps/Step9"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.451, 0)
+shaded = true
+text = "0.9"
+font_size = 60
+outline_size = 5
+
+[node name="Step10" type="CSGBox3D" parent="Steps/TenthSteps"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -18)
+material_override = ExtResource("1_7tch0")
+use_collision = true
+size = Vector3(2, 1, 2)
+
+[node name="Label" type="Label3D" parent="Steps/TenthSteps/Step10"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.501, 0)
+shaded = true
+text = "1.0"
+font_size = 60
+outline_size = 5
+
+[node name="QuaterSteps" type="Node3D" parent="Steps"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -1)
+
+[node name="Step1" type="CSGBox3D" parent="Steps/QuaterSteps"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.125, 0)
+material_override = ExtResource("1_7tch0")
+use_collision = true
+size = Vector3(2, 0.25, 2)
+
+[node name="Label" type="Label3D" parent="Steps/QuaterSteps/Step1"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.126, 0)
+shaded = true
+text = "0.25	"
+font_size = 60
+outline_size = 5
+
+[node name="Step2" type="CSGBox3D" parent="Steps/QuaterSteps"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, -2)
+material_override = ExtResource("1_7tch0")
+use_collision = true
+size = Vector3(2, 0.5, 2)
+
+[node name="Label" type="Label3D" parent="Steps/QuaterSteps/Step2"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.251, 0)
+shaded = true
+text = "0.5"
+font_size = 60
+outline_size = 5
+
+[node name="Step3" type="CSGBox3D" parent="Steps/QuaterSteps"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.375, -4)
+material_override = ExtResource("1_7tch0")
+use_collision = true
+size = Vector3(2, 0.75, 2)
+
+[node name="Label" type="Label3D" parent="Steps/QuaterSteps/Step3"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.376, 0)
+shaded = true
+text = "0.75"
+font_size = 60
+outline_size = 5
+
+[node name="Step4" type="CSGBox3D" parent="Steps/QuaterSteps"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -6)
+material_override = ExtResource("1_7tch0")
+use_collision = true
+size = Vector3(2, 1, 2)
+
+[node name="Label" type="Label3D" parent="Steps/QuaterSteps/Step4"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.501, 0)
+shaded = true
+text = "1.0"
+font_size = 60
+outline_size = 5
+
+[node name="Step5" type="CSGBox3D" parent="Steps/QuaterSteps"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.625, -8)
+material_override = ExtResource("1_7tch0")
+use_collision = true
+size = Vector3(2, 1.25, 2)
+
+[node name="Label" type="Label3D" parent="Steps/QuaterSteps/Step5"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.626, 0)
+shaded = true
+text = "1.25"
+font_size = 60
+outline_size = 5
+
+[node name="Step6" type="CSGBox3D" parent="Steps/QuaterSteps"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, -10)
+material_override = ExtResource("1_7tch0")
+use_collision = true
+size = Vector3(2, 1.5, 2)
+
+[node name="Label" type="Label3D" parent="Steps/QuaterSteps/Step6"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.751, 0)
+shaded = true
+text = "1.5"
+font_size = 60
+outline_size = 5
+
+[node name="Step7" type="CSGBox3D" parent="Steps/QuaterSteps"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.875, -12)
+material_override = ExtResource("1_7tch0")
+use_collision = true
+size = Vector3(2, 1.75, 2)
+
+[node name="Label" type="Label3D" parent="Steps/QuaterSteps/Step7"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.876, 0)
+shaded = true
+text = "1.75"
+font_size = 60
+outline_size = 5
+
+[node name="Step8" type="CSGBox3D" parent="Steps/QuaterSteps"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -14)
+material_override = ExtResource("1_7tch0")
+use_collision = true
+size = Vector3(2, 2, 2)
+
+[node name="Label" type="Label3D" parent="Steps/QuaterSteps/Step8"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 1.001, 0)
+shaded = true
+text = "2.0"
+font_size = 60
+outline_size = 5
+
+[node name="HalfSteps" type="Node3D" parent="Steps"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.99998, 0, -1.00752)
+
+[node name="Step1" type="CSGBox3D" parent="Steps/HalfSteps"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
+material_override = ExtResource("1_7tch0")
+use_collision = true
+size = Vector3(2, 0.5, 2)
+
+[node name="Label" type="Label3D" parent="Steps/HalfSteps/Step1"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.251, 0)
+shaded = true
+text = "0.5"
+font_size = 60
+outline_size = 5
+
+[node name="Step2" type="CSGBox3D" parent="Steps/HalfSteps"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -2)
+material_override = ExtResource("1_7tch0")
+use_collision = true
+size = Vector3(2, 1, 2)
+
+[node name="Label" type="Label3D" parent="Steps/HalfSteps/Step2"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.501, 0)
+shaded = true
+text = "1.0"
+font_size = 60
+outline_size = 5
+
+[node name="Step3" type="CSGBox3D" parent="Steps/HalfSteps"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, -4)
+material_override = ExtResource("1_7tch0")
+use_collision = true
+size = Vector3(2, 1.5, 2)
+
+[node name="Label" type="Label3D" parent="Steps/HalfSteps/Step3"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.751, 0)
+shaded = true
+text = "1.5"
+font_size = 60
+outline_size = 5
+
+[node name="Step4" type="CSGBox3D" parent="Steps/HalfSteps"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -6)
+material_override = ExtResource("1_7tch0")
+use_collision = true
+size = Vector3(2, 2, 2)
+
+[node name="Label" type="Label3D" parent="Steps/HalfSteps/Step4"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 1.001, 0)
+shaded = true
+text = "2.0"
+font_size = 60
+outline_size = 5
+
+[node name="Step5" type="CSGBox3D" parent="Steps/HalfSteps"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, -8)
+material_override = ExtResource("1_7tch0")
+use_collision = true
+size = Vector3(2, 2.5, 2)
+
+[node name="Label" type="Label3D" parent="Steps/HalfSteps/Step5"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 1.251, 0)
+shaded = true
+text = "2.5"
+font_size = 60
+outline_size = 5
+
+[node name="Step6" type="CSGBox3D" parent="Steps/HalfSteps"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -10)
+material_override = ExtResource("1_7tch0")
+use_collision = true
+size = Vector3(2, 3, 2)
+
+[node name="Label" type="Label3D" parent="Steps/HalfSteps/Step6"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 1.501, 0)
+shaded = true
+text = "3.0"
+font_size = 60
+outline_size = 5
+
+[node name="Step7" type="CSGBox3D" parent="Steps/HalfSteps"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, -12)
+material_override = ExtResource("1_7tch0")
+use_collision = true
+size = Vector3(2, 3.5, 2)
+
+[node name="Label" type="Label3D" parent="Steps/HalfSteps/Step7"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 1.751, 0)
+shaded = true
+text = "3.5"
+font_size = 60
+outline_size = 5
+
+[node name="Step8" type="CSGBox3D" parent="Steps/HalfSteps"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -14)
+material_override = ExtResource("1_7tch0")
+use_collision = true
+size = Vector3(2, 4, 2)
+
+[node name="Label" type="Label3D" parent="Steps/HalfSteps/Step8"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 2.001, 0)
+shaded = true
+text = "4.0"
+font_size = 60
+outline_size = 5
+
+[node name="FullSteps" type="Node3D" parent="Steps"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, -1.00752)
+
+[node name="Step1" type="CSGBox3D" parent="Steps/FullSteps"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+material_override = ExtResource("1_7tch0")
+use_collision = true
+size = Vector3(2, 1, 2)
+
+[node name="Label" type="Label3D" parent="Steps/FullSteps/Step1"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.501, 0)
+shaded = true
+text = "1.0"
+font_size = 60
+outline_size = 5
+
+[node name="Step2" type="CSGBox3D" parent="Steps/FullSteps"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -2)
+material_override = ExtResource("1_7tch0")
+use_collision = true
+size = Vector3(2, 2, 2)
+
+[node name="Label" type="Label3D" parent="Steps/FullSteps/Step2"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 1.001, 0)
+shaded = true
+text = "2.0"
+font_size = 60
+outline_size = 5
+
+[node name="Step3" type="CSGBox3D" parent="Steps/FullSteps"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -4)
+material_override = ExtResource("1_7tch0")
+use_collision = true
+size = Vector3(2, 3, 2)
+
+[node name="Label" type="Label3D" parent="Steps/FullSteps/Step3"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 1.501, 0)
+shaded = true
+text = "3.0"
+font_size = 60
+outline_size = 5
+
+[node name="Step4" type="CSGBox3D" parent="Steps/FullSteps"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -6)
+material_override = ExtResource("1_7tch0")
+use_collision = true
+size = Vector3(2, 4, 2)
+
+[node name="Label" type="Label3D" parent="Steps/FullSteps/Step4"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 2.001, 0)
+shaded = true
+text = "4.0"
+font_size = 60
+outline_size = 5
+
+[node name="Step5" type="CSGBox3D" parent="Steps/FullSteps"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, -8)
+material_override = ExtResource("1_7tch0")
+use_collision = true
+size = Vector3(2, 5, 2)
+
+[node name="Label" type="Label3D" parent="Steps/FullSteps/Step5"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 2.501, 0)
+shaded = true
+text = "5.0"
+font_size = 60
+outline_size = 5
+
+[node name="Step6" type="CSGBox3D" parent="Steps/FullSteps"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -10)
+material_override = ExtResource("1_7tch0")
+use_collision = true
+size = Vector3(2, 6, 2)
+
+[node name="Label" type="Label3D" parent="Steps/FullSteps/Step6"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 3.001, 0)
+shaded = true
+text = "6.0"
+font_size = 60
+outline_size = 5
+
+[node name="Step7" type="CSGBox3D" parent="Steps/FullSteps"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.5, -12)
+material_override = ExtResource("1_7tch0")
+use_collision = true
+size = Vector3(2, 7, 2)
+
+[node name="Label" type="Label3D" parent="Steps/FullSteps/Step7"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 3.501, 0)
+shaded = true
+text = "7.0"
+font_size = 60
+outline_size = 5
+
+[node name="Step8" type="CSGBox3D" parent="Steps/FullSteps"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, -14)
+material_override = ExtResource("1_7tch0")
+use_collision = true
+size = Vector3(2, 8, 2)
+
+[node name="Label" type="Label3D" parent="Steps/FullSteps/Step8"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 4.001, 0)
+shaded = true
+text = "8.0"
+font_size = 60
+outline_size = 5
+
+[node name="Ceilings" type="Node3D" parent="."]
+transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 9, 0, 4)
+
+[node name="CeilingRoot1" type="Node3D" parent="Ceilings"]
+
+[node name="Ceiling" type="CSGBox3D" parent="Ceilings/CeilingRoot1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+material_override = ExtResource("1_7tch0")
+use_collision = true
+size = Vector3(2, 1, 2)
+
+[node name="Label" type="Label3D" parent="Ceilings/CeilingRoot1/Ceiling"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 1.001)
+shaded = true
+text = "0.0"
+font_size = 60
+outline_size = 5
+
+[node name="CeilingRoot2" type="Node3D" parent="Ceilings"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.2, 0)
+
+[node name="Ceiling" type="CSGBox3D" parent="Ceilings/CeilingRoot2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+material_override = ExtResource("1_7tch0")
+use_collision = true
+size = Vector3(2, 1, 2)
+
+[node name="Label" type="Label3D" parent="Ceilings/CeilingRoot2/Ceiling"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 1.001)
+shaded = true
+text = "0.2"
+font_size = 60
+outline_size = 5
+
+[node name="CeilingRoot3" type="Node3D" parent="Ceilings"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0.4, 0)
+
+[node name="Ceiling" type="CSGBox3D" parent="Ceilings/CeilingRoot3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+material_override = ExtResource("1_7tch0")
+use_collision = true
+size = Vector3(2, 1, 2)
+
+[node name="Label" type="Label3D" parent="Ceilings/CeilingRoot3/Ceiling"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 1.001)
+shaded = true
+text = "0.4"
+font_size = 60
+outline_size = 5
+
+[node name="CeilingRoot4" type="Node3D" parent="Ceilings"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0.6, 0)
+
+[node name="Ceiling" type="CSGBox3D" parent="Ceilings/CeilingRoot4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+material_override = ExtResource("1_7tch0")
+use_collision = true
+size = Vector3(2, 1, 2)
+
+[node name="Label" type="Label3D" parent="Ceilings/CeilingRoot4/Ceiling"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 1.001)
+shaded = true
+text = "0.6"
+font_size = 60
+outline_size = 5
+
+[node name="CeilingRoot5" type="Node3D" parent="Ceilings"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0.8, 0)
+
+[node name="Ceiling" type="CSGBox3D" parent="Ceilings/CeilingRoot5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+material_override = ExtResource("1_7tch0")
+use_collision = true
+size = Vector3(2, 1, 2)
+
+[node name="Label" type="Label3D" parent="Ceilings/CeilingRoot5/Ceiling"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 1.001)
+shaded = true
+text = "0.8"
+font_size = 60
+outline_size = 5
+
+[node name="CeilingRoot6" type="Node3D" parent="Ceilings"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 1, 0)
+
+[node name="Ceiling" type="CSGBox3D" parent="Ceilings/CeilingRoot6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+material_override = ExtResource("1_7tch0")
+use_collision = true
+size = Vector3(2, 1, 2)
+
+[node name="Label" type="Label3D" parent="Ceilings/CeilingRoot6/Ceiling"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 1.001)
+shaded = true
+text = "1.0"
+font_size = 60
+outline_size = 5
+
+[node name="CeilingRoot7" type="Node3D" parent="Ceilings"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 1.2, 0)
+
+[node name="Ceiling" type="CSGBox3D" parent="Ceilings/CeilingRoot7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+material_override = ExtResource("1_7tch0")
+use_collision = true
+size = Vector3(2, 1, 2)
+
+[node name="Label" type="Label3D" parent="Ceilings/CeilingRoot7/Ceiling"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 1.001)
+shaded = true
+text = "1.2"
+font_size = 60
+outline_size = 5
+
+[node name="CeilingRoot8" type="Node3D" parent="Ceilings"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 1.4, 0)
+
+[node name="Ceiling" type="CSGBox3D" parent="Ceilings/CeilingRoot8"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+material_override = ExtResource("1_7tch0")
+use_collision = true
+size = Vector3(2, 1, 2)
+
+[node name="Label" type="Label3D" parent="Ceilings/CeilingRoot8/Ceiling"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 1.001)
+shaded = true
+text = "1.4"
+font_size = 60
+outline_size = 5
+
+[node name="CeilingRoot9" type="Node3D" parent="Ceilings"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 1.6, 0)
+
+[node name="Ceiling" type="CSGBox3D" parent="Ceilings/CeilingRoot9"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+material_override = ExtResource("1_7tch0")
+use_collision = true
+size = Vector3(2, 1, 2)
+
+[node name="Label" type="Label3D" parent="Ceilings/CeilingRoot9/Ceiling"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 1.001)
+shaded = true
+text = "1.6"
+font_size = 60
+outline_size = 5
+
+[node name="CeilingRoot10" type="Node3D" parent="Ceilings"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 1.8, 0)
+
+[node name="Ceiling" type="CSGBox3D" parent="Ceilings/CeilingRoot10"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+material_override = ExtResource("1_7tch0")
+use_collision = true
+size = Vector3(2, 1, 2)
+
+[node name="Label" type="Label3D" parent="Ceilings/CeilingRoot10/Ceiling"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 1.001)
+shaded = true
+text = "1.8"
+font_size = 60
+outline_size = 5
+
+[node name="CeilingRoot11" type="Node3D" parent="Ceilings"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 2, 0)
+
+[node name="Ceiling" type="CSGBox3D" parent="Ceilings/CeilingRoot11"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+material_override = ExtResource("1_7tch0")
+use_collision = true
+size = Vector3(2, 1, 2)
+
+[node name="Label" type="Label3D" parent="Ceilings/CeilingRoot11/Ceiling"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 1.001)
+shaded = true
+text = "2.0"
+font_size = 60
+outline_size = 5
+
+[node name="Poles" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0, 4)
+
+[node name="PolePivot1" type="Node3D" parent="Poles"]
+
+[node name="Pole" type="CSGCylinder3D" parent="Poles/PolePivot1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+material_override = ExtResource("1_7tch0")
+use_collision = true
+height = 4.0
+sides = 32
+
+[node name="Label2" type="Label3D" parent="Poles/PolePivot1/Pole"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 2.001, 0)
+shaded = true
+text = "4.0"
+font_size = 60
+outline_size = 5
+
+[node name="PolePivot2" type="Node3D" parent="Poles"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 2)
+
+[node name="Pole" type="CSGCylinder3D" parent="Poles/PolePivot2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+material_override = ExtResource("1_7tch0")
+use_collision = true
+height = 4.0
+sides = 32
+
+[node name="Label2" type="Label3D" parent="Poles/PolePivot2/Pole"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 2.001, 0)
+shaded = true
+text = "4.0"
+font_size = 60
+outline_size = 5
+
+[node name="PolePivot3" type="Node3D" parent="Poles"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
+
+[node name="Pole" type="CSGCylinder3D" parent="Poles/PolePivot3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+material_override = ExtResource("1_7tch0")
+use_collision = true
+height = 4.0
+sides = 32
+
+[node name="Label2" type="Label3D" parent="Poles/PolePivot3/Pole"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 2.001, 0)
+shaded = true
+text = "4.0"
+font_size = 60
+outline_size = 5
+
+[node name="PolePivot4" type="Node3D" parent="Poles"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 6)
+
+[node name="Pole" type="CSGCylinder3D" parent="Poles/PolePivot4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+material_override = ExtResource("1_7tch0")
+use_collision = true
+height = 4.0
+sides = 32
+
+[node name="Label2" type="Label3D" parent="Poles/PolePivot4/Pole"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 2.001, 0)
+shaded = true
+text = "4.0"
+font_size = 60
+outline_size = 5
+
+[node name="PolePivot5" type="Node3D" parent="Poles"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 0)
+
+[node name="Pole" type="CSGCylinder3D" parent="Poles/PolePivot5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+material_override = ExtResource("1_7tch0")
+use_collision = true
+radius = 1.0
+height = 4.0
+sides = 32
+
+[node name="Label2" type="Label3D" parent="Poles/PolePivot5/Pole"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 2.001, 0)
+shaded = true
+text = "4.0"
+font_size = 60
+outline_size = 5
+
+[node name="PolePivot6" type="Node3D" parent="Poles"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 5)
+
+[node name="Pole" type="CSGCylinder3D" parent="Poles/PolePivot6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 2, 0)
+material_override = ExtResource("1_7tch0")
+use_collision = true
+radius = 2.0
+height = 4.0
+sides = 32
+
+[node name="Label2" type="Label3D" parent="Poles/PolePivot6/Pole"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 2.001, 0)
+shaded = true
+text = "4.0"
+font_size = 60
+outline_size = 5
+
+[node name="Gaps" type="Node3D" parent="."]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 4)
+
+[node name="GapRoot1" type="Node3D" parent="Gaps"]
+
+[node name="Label" type="Label3D" parent="Gaps/GapRoot1"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.001, 0)
+shaded = true
+text = "2.0"
+font_size = 60
+outline_size = 5
+
+[node name="LeftPillar" type="CSGBox3D" parent="Gaps/GapRoot1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 1, 0)
+material_override = ExtResource("1_7tch0")
+use_collision = true
+size = Vector3(1, 2, 1)
+
+[node name="RightPillar" type="CSGBox3D" parent="Gaps/GapRoot1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 1, 0)
+material_override = ExtResource("1_7tch0")
+use_collision = true
+size = Vector3(1, 2, 1)
+
+[node name="GapRoot2" type="Node3D" parent="Gaps"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+
+[node name="Label" type="Label3D" parent="Gaps/GapRoot2"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.001, 0)
+shaded = true
+text = "1.5"
+font_size = 60
+outline_size = 5
+
+[node name="LeftPillar" type="CSGBox3D" parent="Gaps/GapRoot2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.25, 1, 0)
+material_override = ExtResource("1_7tch0")
+use_collision = true
+size = Vector3(1, 2, 1)
+
+[node name="RightPillar" type="CSGBox3D" parent="Gaps/GapRoot2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.25, 1, 0)
+material_override = ExtResource("1_7tch0")
+use_collision = true
+size = Vector3(1, 2, 1)
+
+[node name="GapRoot3" type="Node3D" parent="Gaps"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
+
+[node name="Label" type="Label3D" parent="Gaps/GapRoot3"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.001, 0)
+shaded = true
+text = "1.25"
+font_size = 60
+outline_size = 5
+
+[node name="LeftPillar" type="CSGBox3D" parent="Gaps/GapRoot3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.125, 1, 0)
+material_override = ExtResource("1_7tch0")
+use_collision = true
+size = Vector3(1, 2, 1)
+
+[node name="RightPillar" type="CSGBox3D" parent="Gaps/GapRoot3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.125, 1, 0)
+material_override = ExtResource("1_7tch0")
+use_collision = true
+size = Vector3(1, 2, 1)
+
+[node name="GapRoot4" type="Node3D" parent="Gaps"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3)
+
+[node name="Label" type="Label3D" parent="Gaps/GapRoot4"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.001, 0)
+shaded = true
+text = "1.0"
+font_size = 60
+outline_size = 5
+
+[node name="LeftPillar" type="CSGBox3D" parent="Gaps/GapRoot4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1, 0)
+material_override = ExtResource("1_7tch0")
+use_collision = true
+size = Vector3(1, 2, 1)
+
+[node name="RightPillar" type="CSGBox3D" parent="Gaps/GapRoot4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 0)
+material_override = ExtResource("1_7tch0")
+use_collision = true
+size = Vector3(1, 2, 1)
+
+[node name="GapRoot5" type="Node3D" parent="Gaps"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4)
+
+[node name="Label" type="Label3D" parent="Gaps/GapRoot5"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.001, 0)
+shaded = true
+text = "0.9"
+font_size = 60
+outline_size = 5
+
+[node name="LeftPillar" type="CSGBox3D" parent="Gaps/GapRoot5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.95, 1, 0)
+material_override = ExtResource("1_7tch0")
+use_collision = true
+size = Vector3(1, 2, 1)
+
+[node name="RightPillar" type="CSGBox3D" parent="Gaps/GapRoot5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.95, 1, 0)
+material_override = ExtResource("1_7tch0")
+use_collision = true
+size = Vector3(1, 2, 1)
+
+[node name="GapRoot6" type="Node3D" parent="Gaps"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5)
+
+[node name="Label" type="Label3D" parent="Gaps/GapRoot6"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.001, 0)
+shaded = true
+text = "0.8"
+font_size = 60
+outline_size = 5
+
+[node name="LeftPillar" type="CSGBox3D" parent="Gaps/GapRoot6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9, 1, 0)
+material_override = ExtResource("1_7tch0")
+use_collision = true
+size = Vector3(1, 2, 1)
+
+[node name="RightPillar" type="CSGBox3D" parent="Gaps/GapRoot6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.9, 1, 0)
+material_override = ExtResource("1_7tch0")
+use_collision = true
+size = Vector3(1, 2, 1)
+
+[node name="GapRoot7" type="Node3D" parent="Gaps"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6)
+
+[node name="Label" type="Label3D" parent="Gaps/GapRoot7"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.001, 0)
+shaded = true
+text = "0.7"
+font_size = 60
+outline_size = 5
+
+[node name="LeftPillar" type="CSGBox3D" parent="Gaps/GapRoot7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.85, 1, 0)
+material_override = ExtResource("1_7tch0")
+use_collision = true
+size = Vector3(1, 2, 1)
+
+[node name="RightPillar" type="CSGBox3D" parent="Gaps/GapRoot7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.85, 1, 0)
+material_override = ExtResource("1_7tch0")
+use_collision = true
+size = Vector3(1, 2, 1)
+
+[node name="GapRoot8" type="Node3D" parent="Gaps"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.74228e-08, 0, -7)
+
+[node name="Label" type="Label3D" parent="Gaps/GapRoot8"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.001, 0)
+shaded = true
+text = "0.6"
+font_size = 60
+outline_size = 5
+
+[node name="LeftPillar" type="CSGBox3D" parent="Gaps/GapRoot8"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8, 1, 0)
+material_override = ExtResource("1_7tch0")
+use_collision = true
+size = Vector3(1, 2, 1)
+
+[node name="RightPillar" type="CSGBox3D" parent="Gaps/GapRoot8"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8, 1, 0)
+material_override = ExtResource("1_7tch0")
+use_collision = true
+size = Vector3(1, 2, 1)
+
+[node name="GapRoot9" type="Node3D" parent="Gaps"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.74846e-07, 0, -8)
+
+[node name="Label" type="Label3D" parent="Gaps/GapRoot9"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.001, 0)
+shaded = true
+text = "0.5"
+font_size = 60
+outline_size = 5
+
+[node name="LeftPillar" type="CSGBox3D" parent="Gaps/GapRoot9"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.75, 1, 0)
+material_override = ExtResource("1_7tch0")
+use_collision = true
+size = Vector3(1, 2, 1)
+
+[node name="RightPillar" type="CSGBox3D" parent="Gaps/GapRoot9"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.75, 1, 0)
+material_override = ExtResource("1_7tch0")
+use_collision = true
+size = Vector3(1, 2, 1)
+
+[node name="GapRoot10" type="Node3D" parent="Gaps"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.62268e-07, 0, -9)
+
+[node name="Label" type="Label3D" parent="Gaps/GapRoot10"]
+transform = Transform3D(0.9, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.001, 0)
+shaded = true
+text = "0.4"
+font_size = 60
+outline_size = 5
+
+[node name="LeftPillar" type="CSGBox3D" parent="Gaps/GapRoot10"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7, 1, 0)
+material_override = ExtResource("1_7tch0")
+use_collision = true
+size = Vector3(1, 2, 1)
+
+[node name="RightPillar" type="CSGBox3D" parent="Gaps/GapRoot10"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7, 1, 0)
+material_override = ExtResource("1_7tch0")
+use_collision = true
+size = Vector3(1, 2, 1)
+
+[node name="GapRoot11" type="Node3D" parent="Gaps"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.49691e-07, 0, -10)
+
+[node name="Label" type="Label3D" parent="Gaps/GapRoot11"]
+transform = Transform3D(0.65, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.001, 0)
+shaded = true
+text = "0.3"
+font_size = 60
+outline_size = 5
+
+[node name="LeftPillar" type="CSGBox3D" parent="Gaps/GapRoot11"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.65, 1, 0)
+material_override = ExtResource("1_7tch0")
+use_collision = true
+size = Vector3(1, 2, 1)
+
+[node name="RightPillar" type="CSGBox3D" parent="Gaps/GapRoot11"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.65, 1, 0)
+material_override = ExtResource("1_7tch0")
+use_collision = true
+size = Vector3(1, 2, 1)
+
+[node name="GapRoot12" type="Node3D" parent="Gaps"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.37114e-07, 0, -11)
+
+[node name="Label" type="Label3D" parent="Gaps/GapRoot12"]
+transform = Transform3D(0.4, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.001, 0)
+shaded = true
+text = "0.2"
+font_size = 60
+outline_size = 5
+
+[node name="LeftPillar" type="CSGBox3D" parent="Gaps/GapRoot12"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, 1, 0)
+material_override = ExtResource("1_7tch0")
+use_collision = true
+size = Vector3(1, 2, 1)
+
+[node name="RightPillar" type="CSGBox3D" parent="Gaps/GapRoot12"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, 1, 0)
+material_override = ExtResource("1_7tch0")
+use_collision = true
+size = Vector3(1, 2, 1)
+
+[node name="GapRoot13" type="Node3D" parent="Gaps"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.24537e-07, 0, -12)
+
+[node name="Label" type="Label3D" parent="Gaps/GapRoot13"]
+transform = Transform3D(0.2, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.001, 0)
+shaded = true
+text = "0.1"
+font_size = 60
+outline_size = 5
+
+[node name="LeftPillar" type="CSGBox3D" parent="Gaps/GapRoot13"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.55, 1, 0)
+material_override = ExtResource("1_7tch0")
+use_collision = true
+size = Vector3(1, 2, 1)
+
+[node name="RightPillar" type="CSGBox3D" parent="Gaps/GapRoot13"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.55, 1, 0)
+material_override = ExtResource("1_7tch0")
+use_collision = true
+size = Vector3(1, 2, 1)

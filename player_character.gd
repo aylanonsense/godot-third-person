@@ -23,5 +23,5 @@ func _physics_process(_delta: float) -> void:
 	var facing_right := up.cross(facing_back).normalized()
 	facing_back = facing_right.cross(up)
 	var facing_basis := Basis(facing_right, up, facing_back)
-	velocity = facing_basis * move_speed * Vector3(move_vector.x, 0.0, -move_vector.y)
+	velocity = facing_basis * move_speed * Vector3(move_vector.x, 0.0, -move_vector.y) + velocity.y * Vector3.UP
 	move_and_slide()
