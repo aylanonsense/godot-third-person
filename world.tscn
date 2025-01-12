@@ -25,6 +25,5 @@ light_energy = 0.3
 shadow_enabled = true
 
 [node name="PlayerCharacter" parent="." instance=ExtResource("1_r378l")]
-mouse_look_sensitivity = 0.3
 
 [node name="TestGeometry" parent="." instance=ExtResource("2_jp6cj")]

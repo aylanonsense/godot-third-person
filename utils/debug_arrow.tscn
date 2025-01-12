@@ -1,0 +1,52 @@
+[gd_scene load_steps=5 format=3 uid="uid://fng2vq7q685f"]
+
+[ext_resource type="Script" path="res://utils/debug_arrow.gd" id="1_wj0un"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rfyv0"]
+resource_local_to_scene = true
+shading_mode = 0
+disable_receive_shadows = true
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_pe05j"]
+top_radius = 0.0
+bottom_radius = 0.05
+height = 0.2
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_6gnth"]
+top_radius = 0.01
+bottom_radius = 0.01
+height = 0.8
+
+[node name="DebugArrow" type="Node3D"]
+script = ExtResource("1_wj0un")
+
+[node name="Head" type="Node3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+
+[node name="HeadMesh" type="MeshInstance3D" parent="Head"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0.1)
+material_override = SubResource("StandardMaterial3D_rfyv0")
+cast_shadow = 0
+gi_mode = 0
+mesh = SubResource("CylinderMesh_pe05j")
+skeleton = NodePath("../..")
+
+[node name="Tail" type="Node3D" parent="."]
+unique_name_in_owner = true
+
+[node name="TailMesh" type="MeshInstance3D" parent="Tail"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, -0.4)
+material_override = SubResource("StandardMaterial3D_rfyv0")
+cast_shadow = 0
+gi_mode = 0
+mesh = SubResource("CylinderMesh_6gnth")
+skeleton = NodePath("../..")
+
+[node name="DeathTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+one_shot = true
+
+[connection signal="timeout" from="DeathTimer" to="." method="_on_death_timer_timeout"]
