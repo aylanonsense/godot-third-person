@@ -18,6 +18,10 @@ config/features=PackedStringArray("4.3", "GL Compatibility")
 
 DebugArrowDrawer="*res://utils/debug_arrow_drawer.tscn"
 
+[debug]
+
+gdscript/warnings/shadowed_variable=0
+
 [display]
 
 window/size/viewport_width=1920
