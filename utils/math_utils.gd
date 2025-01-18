@@ -1,4 +1,9 @@
-class_name VectorUtils
+class_name MathUtils
+
+
+static func sign_or_1(value: float):
+	var x := signf(value)
+	return 1.0 if x == 0.0 else x
 
 
 static func project_vector_onto_slope(vector: Vector3, slope_normal: Vector3, up: Vector3 = Vector3.UP) -> Vector3:
@@ -19,3 +24,11 @@ static func project_vector_onto_slope(vector: Vector3, slope_normal: Vector3, up
 
 static func project_vector_onto_plane(vector: Vector3, plane_normal: Vector3) -> Vector3:
 	return vector - vector.project(plane_normal)
+
+
+static func to_global_direction(node: Node3D, local_direction: Vector3) -> Vector3:
+	return node.to_global(local_direction) - node.global_position
+
+
+static func to_local_direction(node: Node3D, global_direction: Vector3) -> Vector3:
+	return node.to_local(node.global_position + global_direction)
