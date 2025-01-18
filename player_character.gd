@@ -40,10 +40,11 @@ var _collider_height: float
 
 # State
 var _just_jumped := false
-#var _last_move_step_direction := Vector3.FORWARD
+var _last_move_step_direction := Vector3.FORWARD
 
 # Floor state
 var _is_on_floor := false
+var _was_on_floor_last_frame := false
 var _floor_normal: Vector3
 var _reused_floor_from_last_frame := false
 var _was_previously_on_floor := false
@@ -77,6 +78,7 @@ func _input(event: InputEvent) -> void:
 
 func _physics_process(delta: float) -> void:
 	var global_position_at_frame_start := global_position
+	_was_on_floor_last_frame = _is_on_floor
 	# If we found a floor last frame, we reuse it for the time being as our current floor
 	if _is_on_floor and not _reused_floor_from_last_frame:
 		_reused_floor_from_last_frame = true
@@ -137,7 +139,7 @@ func _move_in_multiple_steps(movement: Vector3) -> void:
 		# Stop when we're out of movement
 		if movement.is_zero_approx():
 			return
-		#_last_move_step_direction = movement.normalized()
+		_last_move_step_direction = movement.normalized()
 		# Try moving the full distance
 		var collision_info := move_and_collide(movement)
 		# If there were no collisions, we'll take that to mean we were able to move the full distance and there's no movement remaining
@@ -216,8 +218,8 @@ func _move_in_multiple_steps(movement: Vector3) -> void:
 
 
 func _snap_to_floor() -> void:
-	# Don't snap to the floor if we just jumped or already touched a floor this frame
-	if _just_jumped or (_is_on_floor and not _reused_floor_from_last_frame):
+	# Don't snap to the floor if we just jumped or already touched a floor this frame or haven't touched a floor in a while
+	if _just_jumped or (_is_on_floor and not _reused_floor_from_last_frame) or (not _is_on_floor and not _was_on_floor_last_frame):
 		return
 	# Move straight down
 	var movement := FLOOR_SNAP_MOVE_DISTANCE * -_up
@@ -234,26 +236,43 @@ func _snap_to_floor() -> void:
 		var vector_from_feet_to_collision := collision_contact_position - global_position
 		var height_of_collision := vector_from_feet_to_collision.dot(_up)
 		# Check if this surface could qualify as a floor
-		if collision_angle <= _max_floor_angle and height_of_collision <= 0.5 * _collider_height:
-			# Set this surface as the new floor
-			_was_previously_on_floor = _is_on_floor
-			_previous_floor_normal = _floor_normal
-			_is_on_floor = true
-			_floor_normal = collision_normal
-			_reused_floor_from_last_frame = false
-			# Recalculate bases
-			var previous_inverse_move_basis := _inverse_move_basis
-			_calculate_and_set_bases_and_vectors()
-			# If we move between floors, adjust velocity to match the new slope
-			if _was_previously_on_floor and _previous_floor_normal != _floor_normal:
-				var old_move_basis_velocity := previous_inverse_move_basis * velocity
-				velocity = _move_basis * old_move_basis_velocity
-			# Cancel out velocity towards the surface of the collision
-			var collision_velocity_dot_product := collision_normal.dot(velocity) # Positive if velocity is away from the surface
-			var is_velocity_away_from_surface := collision_velocity_dot_product > 0.0
-			if not is_velocity_away_from_surface:
-				var velocity_towards_surface := collision_velocity_dot_product * collision_normal
-				velocity -= velocity_towards_surface
+		if not (collision_angle <= _max_floor_angle and height_of_collision <= 0.5 * _collider_height):
+			continue
+		# Check if this surface is an edge that we're falling off of
+		var original_floor_snap_edge_cast_position := _floor_snap_edge_cast.global_position
+		var floor_snap_edge_cast_vector := MathUtils.to_global_direction(_floor_snap_edge_cast, _floor_snap_edge_cast.target_position)
+		var floor_snap_edge_cast_forward_start_position := collision_contact_position - 0.5 * floor_snap_edge_cast_vector + FLOOR_SNAP_EDGE_CHECK_DISTANCE * _last_move_step_direction
+		_floor_snap_edge_cast.global_position = floor_snap_edge_cast_forward_start_position
+		_floor_snap_edge_cast.force_raycast_update()
+		_floor_snap_edge_cast.global_position = original_floor_snap_edge_cast_position
+		# If no surface could be found a little bit forward, it means we moved off of a cliff and shouldn't snap to the edge
+		if not _floor_snap_edge_cast.is_colliding():
+			continue
+		# If the surface a little bit forward from here is too different from the current floor, it probably means we moved off a cliff with a jutting-out edge
+		var floor_edge_cast_normal := _floor_snap_edge_cast.get_collision_normal()
+		var angle_between_floor_normal_and_edge_cast_normal := floor_edge_cast_normal.angle_to(collision_normal)
+		if angle_between_floor_normal_and_edge_cast_normal > _max_floor_snap_angle_change:
+			continue
+		# Set this surface as the new floor
+		_was_previously_on_floor = _is_on_floor
+		_previous_floor_normal = _floor_normal
+		_is_on_floor = true
+		_floor_normal = collision_normal
+		_reused_floor_from_last_frame = false
+		# Recalculate bases
+		var previous_inverse_move_basis := _inverse_move_basis
+		_calculate_and_set_bases_and_vectors()
+		# If we move between floors, adjust velocity to match the new slope
+		if _was_previously_on_floor and _previous_floor_normal != _floor_normal:
+			var old_move_basis_velocity := previous_inverse_move_basis * velocity
+			velocity = _move_basis * old_move_basis_velocity
+		# Cancel out velocity towards the surface of the collision
+		var collision_velocity_dot_product := collision_normal.dot(velocity) # Positive if velocity is away from the surface
+		var is_velocity_away_from_surface := collision_velocity_dot_product > 0.0
+		if not is_velocity_away_from_surface:
+			var velocity_towards_surface := collision_velocity_dot_product * collision_normal
+			velocity -= velocity_towards_surface
+		break
 	# Undo the movement if we didn't find any floor
 	if not _is_on_floor or _reused_floor_from_last_frame:
 		move_and_collide(-collision_info.get_travel())
