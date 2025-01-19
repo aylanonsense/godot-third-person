@@ -1413,3 +1413,225 @@ shaded = true
 text = "90°"
 font_size = 60
 outline_size = 5
+
+[node name="BlockyBumps" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 0, 4)
+
+[node name="BlockyBumpGroup1" type="Node3D" parent="BlockyBumps"]
+
+[node name="Label" type="Label3D" parent="BlockyBumps/BlockyBumpGroup1"]
+transform = Transform3D(-1, 6.35732e-08, -8.74228e-08, -8.74228e-08, -2.98023e-08, 1, 6.35732e-08, 1, 2.98023e-08, 0.25, 0.00100008, -0.25)
+shaded = true
+text = "5°"
+font_size = 60
+outline_size = 5
+
+[node name="BlockyBumpLeftPivot1" type="Node3D" parent="BlockyBumps/BlockyBumpGroup1"]
+transform = Transform3D(1, 0, 0, 0, 0.996195, -0.0871557, 0, 0.0871557, 0.996195, 0, 0.0436295, 0.500494)
+
+[node name="BlockyBump" type="CSGBox3D" parent="BlockyBumps/BlockyBumpGroup1/BlockyBumpLeftPivot1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0.5)
+material_override = ExtResource("1_7tch0")
+use_collision = true
+size = Vector3(4, 1, 1)
+
+[node name="BlockyBumpRightPivot1" type="Node3D" parent="BlockyBumps/BlockyBumpGroup1"]
+transform = Transform3D(1, 0, 0, 0, 0.996195, 0.0871557, 0, -0.0871557, 0.996195, 0, 0.0436295, 0.500494)
+
+[node name="BlockyBump" type="CSGBox3D" parent="BlockyBumps/BlockyBumpGroup1/BlockyBumpRightPivot1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, -0.5)
+material_override = ExtResource("1_7tch0")
+use_collision = true
+size = Vector3(4, 1, 1)
+
+[node name="BlockyBumpLeftPivot2" type="Node3D" parent="BlockyBumps/BlockyBumpGroup1"]
+transform = Transform3D(1, 0, 0, 0, 0.996195, -0.0871557, 0, 0.0871557, 0.996195, 0, 0.0436295, 2.50049)
+
+[node name="BlockyBump" type="CSGBox3D" parent="BlockyBumps/BlockyBumpGroup1/BlockyBumpLeftPivot2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0.5)
+material_override = ExtResource("1_7tch0")
+use_collision = true
+size = Vector3(4, 1, 1)
+
+[node name="BlockyBumpRightPivot2" type="Node3D" parent="BlockyBumps/BlockyBumpGroup1"]
+transform = Transform3D(1, 0, 0, 0, 0.996195, 0.0871557, 0, -0.0871557, 0.996195, 0, 0.0436295, 2.50049)
+
+[node name="BlockyBump" type="CSGBox3D" parent="BlockyBumps/BlockyBumpGroup1/BlockyBumpRightPivot2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, -0.5)
+material_override = ExtResource("1_7tch0")
+use_collision = true
+size = Vector3(4, 1, 1)
+
+[node name="BlockyBumpLeftPivot3" type="Node3D" parent="BlockyBumps/BlockyBumpGroup1"]
+transform = Transform3D(1, 0, 0, 0, 0.996195, -0.0871557, 0, 0.0871557, 0.996195, 0, 0.0436295, 3.50049)
+
+[node name="BlockyBump" type="CSGBox3D" parent="BlockyBumps/BlockyBumpGroup1/BlockyBumpLeftPivot3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0.5)
+material_override = ExtResource("1_7tch0")
+use_collision = true
+size = Vector3(4, 1, 1)
+
+[node name="BlockyBumpRightPivot3" type="Node3D" parent="BlockyBumps/BlockyBumpGroup1"]
+transform = Transform3D(1, 0, 0, 0, 0.996195, 0.0871557, 0, -0.0871557, 0.996195, 0, 0.0436295, 3.50049)
+
+[node name="BlockyBump" type="CSGBox3D" parent="BlockyBumps/BlockyBumpGroup1/BlockyBumpRightPivot3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, -0.5)
+material_override = ExtResource("1_7tch0")
+use_collision = true
+size = Vector3(4, 1, 1)
+
+[node name="BlockyBumpGroup2" type="Node3D" parent="BlockyBumps"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6)
+
+[node name="Label" type="Label3D" parent="BlockyBumps/BlockyBumpGroup2"]
+transform = Transform3D(-1, 6.35732e-08, -8.74228e-08, -8.74228e-08, -2.98023e-08, 1, 6.35732e-08, 1, 2.98023e-08, 0.25, 0.00100008, -0.25)
+shaded = true
+text = "15°"
+font_size = 60
+outline_size = 5
+
+[node name="BlockyBumpLeftPivot1" type="Node3D" parent="BlockyBumps/BlockyBumpGroup2"]
+transform = Transform3D(1, 0, 0, 0, 0.965926, -0.258819, 0, 0.258819, 0.965926, 0, 0.131775, 0.500494)
+
+[node name="BlockyBump" type="CSGBox3D" parent="BlockyBumps/BlockyBumpGroup2/BlockyBumpLeftPivot1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0.5)
+material_override = ExtResource("1_7tch0")
+use_collision = true
+size = Vector3(4, 1, 1)
+
+[node name="BlockyBumpRightPivot1" type="Node3D" parent="BlockyBumps/BlockyBumpGroup2"]
+transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 0.131775, 0.500494)
+
+[node name="BlockyBump" type="CSGBox3D" parent="BlockyBumps/BlockyBumpGroup2/BlockyBumpRightPivot1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, -0.5)
+material_override = ExtResource("1_7tch0")
+use_collision = true
+size = Vector3(4, 1, 1)
+
+[node name="BlockyBumpLeftPivot2" type="Node3D" parent="BlockyBumps/BlockyBumpGroup2"]
+transform = Transform3D(1, 0, 0, 0, 0.965926, -0.258819, 0, 0.258819, 0.965926, 0, 0.131775, 2.50049)
+
+[node name="BlockyBump" type="CSGBox3D" parent="BlockyBumps/BlockyBumpGroup2/BlockyBumpLeftPivot2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0.5)
+material_override = ExtResource("1_7tch0")
+use_collision = true
+size = Vector3(4, 1, 1)
+
+[node name="BlockyBumpRightPivot2" type="Node3D" parent="BlockyBumps/BlockyBumpGroup2"]
+transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 0.131775, 2.50049)
+
+[node name="BlockyBump" type="CSGBox3D" parent="BlockyBumps/BlockyBumpGroup2/BlockyBumpRightPivot2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, -0.5)
+material_override = ExtResource("1_7tch0")
+use_collision = true
+size = Vector3(4, 1, 1)
+
+[node name="BlockyBumpLeftPivot3" type="Node3D" parent="BlockyBumps/BlockyBumpGroup2"]
+transform = Transform3D(1, 0, 0, 0, 0.965926, -0.258819, 0, 0.258819, 0.965926, 0, 0.131775, 3.50049)
+
+[node name="BlockyBump" type="CSGBox3D" parent="BlockyBumps/BlockyBumpGroup2/BlockyBumpLeftPivot3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0.5)
+material_override = ExtResource("1_7tch0")
+use_collision = true
+size = Vector3(4, 1, 1)
+
+[node name="BlockyBumpRightPivot3" type="Node3D" parent="BlockyBumps/BlockyBumpGroup2"]
+transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 0.131775, 3.50049)
+
+[node name="BlockyBump" type="CSGBox3D" parent="BlockyBumps/BlockyBumpGroup2/BlockyBumpRightPivot3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, -0.5)
+material_override = ExtResource("1_7tch0")
+use_collision = true
+size = Vector3(4, 1, 1)
+
+[node name="BlockyBumpGroup3" type="Node3D" parent="BlockyBumps"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 12)
+
+[node name="Label" type="Label3D" parent="BlockyBumps/BlockyBumpGroup3"]
+transform = Transform3D(-1, 6.35732e-08, -8.74228e-08, -8.74228e-08, -2.98023e-08, 1, 6.35732e-08, 1, 2.98023e-08, 0.25, 0.00100008, -0.25)
+shaded = true
+text = "30°"
+font_size = 60
+outline_size = 5
+
+[node name="BlockyBumpLeftPivot1" type="Node3D" parent="BlockyBumps/BlockyBumpGroup3"]
+transform = Transform3D(1, 0, 0, 0, 0.866025, -0.5, 0, 0.5, 0.866025, 0, 0.284214, 0.500494)
+
+[node name="BlockyBump" type="CSGBox3D" parent="BlockyBumps/BlockyBumpGroup3/BlockyBumpLeftPivot1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0.5)
+material_override = ExtResource("1_7tch0")
+use_collision = true
+size = Vector3(4, 1, 1)
+
+[node name="BlockyBumpRightPivot1" type="Node3D" parent="BlockyBumps/BlockyBumpGroup3"]
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 0.284214, 0.500494)
+
+[node name="BlockyBump" type="CSGBox3D" parent="BlockyBumps/BlockyBumpGroup3/BlockyBumpRightPivot1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, -0.5)
+material_override = ExtResource("1_7tch0")
+use_collision = true
+size = Vector3(4, 1, 1)
+
+[node name="BlockyBumpLeftPivot2" type="Node3D" parent="BlockyBumps/BlockyBumpGroup3"]
+transform = Transform3D(1, 0, 0, 0, 0.866025, -0.5, 0, 0.5, 0.866025, 0, 0.284214, 2.50049)
+
+[node name="BlockyBump" type="CSGBox3D" parent="BlockyBumps/BlockyBumpGroup3/BlockyBumpLeftPivot2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0.5)
+material_override = ExtResource("1_7tch0")
+use_collision = true
+size = Vector3(4, 1, 1)
+
+[node name="BlockyBumpRightPivot2" type="Node3D" parent="BlockyBumps/BlockyBumpGroup3"]
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 0.284214, 2.50049)
+
+[node name="BlockyBump" type="CSGBox3D" parent="BlockyBumps/BlockyBumpGroup3/BlockyBumpRightPivot2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, -0.5)
+material_override = ExtResource("1_7tch0")
+use_collision = true
+size = Vector3(4, 1, 1)
+
+[node name="BlockyBumpLeftPivot3" type="Node3D" parent="BlockyBumps/BlockyBumpGroup3"]
+transform = Transform3D(1, 0, 0, 0, 0.866025, -0.5, 0, 0.5, 0.866025, 0, 0.284214, 3.50049)
+
+[node name="BlockyBump" type="CSGBox3D" parent="BlockyBumps/BlockyBumpGroup3/BlockyBumpLeftPivot3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0.5)
+material_override = ExtResource("1_7tch0")
+use_collision = true
+size = Vector3(4, 1, 1)
+
+[node name="BlockyBumpRightPivot3" type="Node3D" parent="BlockyBumps/BlockyBumpGroup3"]
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 0.284214, 3.50049)
+
+[node name="BlockyBump" type="CSGBox3D" parent="BlockyBumps/BlockyBumpGroup3/BlockyBumpRightPivot3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, -0.5)
+material_override = ExtResource("1_7tch0")
+use_collision = true
+size = Vector3(4, 1, 1)
+
+[node name="BlockyBumpGroup4" type="Node3D" parent="BlockyBumps"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 18)
+
+[node name="Label" type="Label3D" parent="BlockyBumps/BlockyBumpGroup4"]
+transform = Transform3D(-1, 6.35732e-08, -8.74228e-08, -8.74228e-08, -2.98023e-08, 1, 6.35732e-08, 1, 2.98023e-08, 0.25, 0.00100008, -0.25)
+shaded = true
+text = "45°"
+font_size = 60
+outline_size = 5
+
+[node name="BlockyBump1" type="CSGBox3D" parent="BlockyBumps/BlockyBumpGroup4"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, -0.707107, 0, 0.707107, 0.707107, 0, -0.211534, 0.5)
+material_override = ExtResource("1_7tch0")
+use_collision = true
+size = Vector3(4, 1, 1)
+
+[node name="BlockyBump2" type="CSGBox3D" parent="BlockyBumps/BlockyBumpGroup4"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, -0.707107, 0, 0.707107, 0.707107, 0, -0.211534, 2.5)
+material_override = ExtResource("1_7tch0")
+use_collision = true
+size = Vector3(4, 1, 1)
+
+[node name="BlockyBump3" type="CSGBox3D" parent="BlockyBumps/BlockyBumpGroup4"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, -0.707107, 0, 0.707107, 0.707107, 0, -0.211534, 3.5)
+material_override = ExtResource("1_7tch0")
+use_collision = true
+size = Vector3(4, 1, 1)

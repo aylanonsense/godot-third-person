@@ -22,7 +22,6 @@ const FLOOR_SNAP_EDGE_CHECK_DISTANCE := 0.01
 @export_range(0.0, 90.0, 0.001, "radians") var _max_floor_angle := 45.0 * PI / 180.0
 @export_range(0.0, 180.0, 0.001, "radians") var _min_wall_angle := 80.0 * PI / 180.0
 @export_range(0.0, 180.0, 0.001, "radians") var _max_wall_angle := 135.0 * PI / 180.0
-@export_range(0.0, 180.0, 0.001, "radians") var _max_floor_snap_angle_change := 15.0 * PI / 180.0
 
 @onready var _collision_shape := %CollisionShape3D as CollisionShape3D
 @onready var _look_yaw_pivot := %LookYawPivot as Node3D
@@ -248,10 +247,10 @@ func _snap_to_floor() -> void:
 		# If no surface could be found a little bit forward, it means we moved off of a cliff and shouldn't snap to the edge
 		if not _floor_snap_edge_cast.is_colliding():
 			continue
-		# If the surface a little bit forward from here is too different from the current floor, it probably means we moved off a cliff with a jutting-out edge
+		# If the surface a little bit forward isn't horizontal enough to qualify as a floor, it means we moved off of a cliff
 		var floor_edge_cast_normal := _floor_snap_edge_cast.get_collision_normal()
-		var angle_between_floor_normal_and_edge_cast_normal := floor_edge_cast_normal.angle_to(collision_normal)
-		if angle_between_floor_normal_and_edge_cast_normal > _max_floor_snap_angle_change:
+		var floor_edge_cast_angle := floor_edge_cast_normal.angle_to(_up)
+		if not (floor_edge_cast_angle <= _max_floor_angle):
 			continue
 		# Set this surface as the new floor
 		_was_previously_on_floor = _is_on_floor
