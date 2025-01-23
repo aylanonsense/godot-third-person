@@ -15,6 +15,7 @@ const MAX_MOVE_STEPS_PER_FRAME := 6
 const COLLISION_SURFACE_SEPARATION_DISTANCE := 0.0001
 const FLOOR_SNAP_MOVE_DISTANCE := 0.1
 const FLOOR_SNAP_EDGE_CHECK_DISTANCE := 0.01
+const MOVE_STEP_DEBUG_ARROW_COLORS: Array[Color] = [Color.RED, Color.ORANGE, Color.YELLOW, Color.GREEN, Color.BLUE, Color.PURPLE, Color.MAGENTA]
 
 @export var _move_speed := 5.0
 @export var _mouse_look_sensitivity := 1.0
@@ -28,7 +29,6 @@ const FLOOR_SNAP_EDGE_CHECK_DISTANCE := 0.01
 @onready var _look_yaw_pivot := %LookYawPivot as Node3D
 @onready var _look_pitch_pivot := %LookPitchPivot as Node3D
 @onready var _floor_snap_edge_cast := %FloorSnapEdgeCast as RayCast3D
-#@onready var _debug_label := %DebugLabel as Label3D
 
 # Bases and vectors
 var _up: Vector3 # The character's up vector
@@ -51,19 +51,13 @@ var _was_previously_on_floor := false
 var _previous_floor_normal: Vector3
 
 # Debug
-var _velocity_move_basis_x_debug_arrow: DebugArrow
-var _velocity_move_basis_y_debug_arrow: DebugArrow
-var _velocity_move_basis_z_debug_arrow: DebugArrow
+var _global_position_at_frame_start: Vector3
+var _debug_movement_steps_info := [] as Array[Dictionary]
 
 
 func _ready() -> void:
 	_collider_height = (_collision_shape.shape as CapsuleShape3D).height
 	_calculate_and_set_bases_and_vectors()
-	# Draw arrows for the character's velocity
-	var arrow_position := global_position + _collider_height / 2.0 * _up
-	_velocity_move_basis_x_debug_arrow = DebugArrowDrawer.draw_arrow(arrow_position, Vector3.ZERO, Color.RED, 1.0, -1.0, self)
-	_velocity_move_basis_y_debug_arrow = DebugArrowDrawer.draw_arrow(arrow_position, Vector3.ZERO, Color.GREEN, 1.0, -1.0, self)
-	_velocity_move_basis_z_debug_arrow = DebugArrowDrawer.draw_arrow(arrow_position, Vector3.ZERO, Color.BLUE, 1.0, -1.0, self)
 
 
 func _input(event: InputEvent) -> void:
@@ -77,9 +71,11 @@ func _input(event: InputEvent) -> void:
 
 
 func _physics_process(delta: float) -> void:
-	var global_position_at_frame_start := global_position
-	_was_on_floor_last_frame = _is_on_floor
+	# Reset debug information
+	_global_position_at_frame_start = global_position
+	_debug_movement_steps_info.clear()
 	# If we found a floor last frame, we reuse it for the time being as our current floor
+	_was_on_floor_last_frame = _is_on_floor
 	if _is_on_floor and not _reused_floor_from_last_frame:
 		_reused_floor_from_last_frame = true
 		_was_previously_on_floor = true
@@ -118,7 +114,8 @@ func _physics_process(delta: float) -> void:
 	# Move
 	_move_in_multiple_steps(velocity * delta)
 	_snap_to_floor()
-	_draw_debug_info_and_arrows(global_position_at_frame_start)
+	# Debug
+	_draw_debug_info_and_arrows()
 
 
 func _calculate_and_set_bases_and_vectors() -> void:
@@ -135,34 +132,42 @@ func _calculate_and_set_bases_and_vectors() -> void:
 
 
 func _move_in_multiple_steps(movement: Vector3) -> void:
-	for i in range(MAX_MOVE_STEPS_PER_FRAME):
+	for step_index in range(MAX_MOVE_STEPS_PER_FRAME):
 		# Stop when we're out of movement
 		if movement.is_zero_approx():
-			return
+			break
 		_last_move_step_direction = movement.normalized()
+		# Record debug info for drawing arrows
+		var _debug_info := {
+			move_direction = movement.normalized(),
+			move_distance = movement.length(),
+			collisions = []
+		}
+		_debug_movement_steps_info.append(_debug_info)
 		# Try moving the full distance
 		var collision_info := move_and_collide(movement)
 		# If there were no collisions, we'll take that to mean we were able to move the full distance and there's no movement remaining
 		if not collision_info:
-			return
+			break
 		# If there are collisions, it means we weren't able to move the full distance
 		var movement_remaining := collision_info.get_remainder()
+		_debug_info.move_distance = collision_info.get_travel().length()
 		# Handle each collision
-		for j in range(collision_info.get_collision_count()):
+		for collision_index in range(collision_info.get_collision_count()):
 			var collision_surface_type := CollisionSurfaceType.NONE
-			var collision_contact_position := collision_info.get_position(j) # global
-			var collision_normal := collision_info.get_normal(j)
+			var collision_contact_position := collision_info.get_position(collision_index) # global
+			var collision_normal := collision_info.get_normal(collision_index)
 			var collision_angle := collision_normal.angle_to(_up)
 			var vector_from_feet_to_collision := collision_contact_position - global_position
 			var height_of_collision := vector_from_feet_to_collision.dot(_up)
 			var collision_movement_dot_product := collision_normal.dot(movement_remaining) # Positive if moving away from the surface
-			var is_movement_away_from_surface := collision_movement_dot_product > 0.0
+			var is_movement_towards_surface := collision_movement_dot_product <= 0.0
 			var collision_velocity_dot_product := collision_normal.dot(velocity) # Positive if velocity is away from the surface
-			var is_velocity_away_from_surface := collision_velocity_dot_product > 0.0
+			var is_velocity_towards_surface := collision_velocity_dot_product <= 0.0
 			# Figure out what type of surface this is, mostly based on the angle of collision
 			if collision_angle <= _max_floor_angle and height_of_collision <= 0.5 * _collider_height:
 				collision_surface_type = CollisionSurfaceType.FLOOR
-			elif is_movement_away_from_surface or is_velocity_away_from_surface:
+			elif not is_movement_towards_surface or not is_velocity_towards_surface:
 				collision_surface_type = CollisionSurfaceType.INCIDENTAL
 			elif _min_wall_angle <= collision_angle and collision_angle <= _max_wall_angle and _is_on_floor:
 				collision_surface_type = CollisionSurfaceType.WALL
@@ -174,11 +179,11 @@ func _move_in_multiple_steps(movement: Vector3) -> void:
 			if collision_surface_type == CollisionSurfaceType.WALL:
 				collision_normal = MathUtils.project_vector_onto_plane(collision_normal, _floor_normal).normalized()
 				collision_movement_dot_product = collision_normal.dot(movement_remaining)
-				is_movement_away_from_surface = collision_movement_dot_product > 0.0
+				is_movement_towards_surface = collision_movement_dot_product <= 0.0
 				collision_velocity_dot_product = collision_normal.dot(velocity)
-				is_velocity_away_from_surface = collision_velocity_dot_product > 0.0
+				is_velocity_towards_surface = collision_velocity_dot_product <= 0.0
 			# Cancel out movement towards the surface of the collision
-			if not is_movement_away_from_surface:
+			if is_movement_towards_surface:
 				var movement_towards_surface := collision_movement_dot_product * collision_normal
 				movement_remaining -= movement_towards_surface
 			# Apply a small amount of movement away from the surface of the collision, to separate them a bit
@@ -199,20 +204,17 @@ func _move_in_multiple_steps(movement: Vector3) -> void:
 					var old_move_basis_velocity := previous_inverse_move_basis * velocity
 					velocity = _move_basis * old_move_basis_velocity
 					collision_velocity_dot_product = collision_normal.dot(velocity) # Positive if velocity is away from the surface
-					is_velocity_away_from_surface = collision_velocity_dot_product > 0.0
+					is_velocity_towards_surface = collision_velocity_dot_product <= 0.0
 			# Cancel out velocity towards the surface of the collision
-			if not is_velocity_away_from_surface:
+			if is_velocity_towards_surface:
 				var velocity_towards_surface := collision_velocity_dot_product * collision_normal
 				velocity -= velocity_towards_surface
-			# Draw a short-lived arrow on the point of contact
-			var debug_arrow_color: Color
-			match collision_surface_type:
-				CollisionSurfaceType.FLOOR: debug_arrow_color = Color.AQUA
-				CollisionSurfaceType.SLOPE: debug_arrow_color = Color.HOT_PINK
-				CollisionSurfaceType.WALL: debug_arrow_color = Color.SADDLE_BROWN
-				CollisionSurfaceType.CEILING: debug_arrow_color = Color.ORANGE
-				_: debug_arrow_color = Color.BLACK
-			DebugArrowDrawer.draw_arrow(collision_contact_position, collision_normal * 0.25, debug_arrow_color, 0.5, 1.0)
+			# Record debug info about collisions for drawing arrows
+			_debug_info.collisions.append({
+				contact_position = collision_contact_position,
+				normal = collision_normal,
+				surface_type = collision_surface_type
+			})
 		# Continue with the remaining movement
 		movement = movement_remaining
 
@@ -228,6 +230,13 @@ func _snap_to_floor() -> void:
 	if not collision_info:
 		move_and_collide(-movement)
 		return
+	# Record debug info for drawing arrows
+	var _debug_info := {
+		move_direction = movement.normalized(),
+		move_distance = collision_info.get_travel().length(),
+		collisions = []
+	}
+	_debug_movement_steps_info.append(_debug_info)
 	# Handle collisions
 	for i in range(collision_info.get_collision_count()):
 		var collision_contact_position := collision_info.get_position(i) # global
@@ -268,25 +277,51 @@ func _snap_to_floor() -> void:
 			velocity = _move_basis * old_move_basis_velocity
 		# Cancel out velocity towards the surface of the collision
 		var collision_velocity_dot_product := collision_normal.dot(velocity) # Positive if velocity is away from the surface
-		var is_velocity_away_from_surface := collision_velocity_dot_product > 0.0
-		if not is_velocity_away_from_surface:
+		var is_velocity_towards_surface := collision_velocity_dot_product <= 0.0
+		if is_velocity_towards_surface:
 			var velocity_towards_surface := collision_velocity_dot_product * collision_normal
 			velocity -= velocity_towards_surface
+		# Record debug info about collisions for drawing arrows
+		_debug_info.collisions.append({
+			contact_position = collision_contact_position,
+			normal = collision_normal,
+			surface_type = CollisionSurfaceType.FLOOR
+		})
+		# Only process the first floor we encounter
 		break
 	# Undo the movement if we didn't find any floor
 	if not _is_on_floor or _reused_floor_from_last_frame:
 		move_and_collide(-collision_info.get_travel())
 
 
-func _draw_debug_info_and_arrows(previous_global_position: Vector3) -> void:
-	var color: Color
+func _draw_debug_info_and_arrows() -> void:
+	# Draw an arrow between the current and previous character positions
+	var position_change_arrow_color: Color
 	if _reused_floor_from_last_frame:
-		color = Color.BLUE_VIOLET
+		position_change_arrow_color = Color.MEDIUM_SPRING_GREEN
 	elif _is_on_floor:
-		color = Color.BLUE
+		position_change_arrow_color = Color.MIDNIGHT_BLUE
 	else:
-		color = Color.RED
-	DebugArrowDrawer.draw_arrow_between(previous_global_position, global_position, color, 0.5, 10.0)
+		position_change_arrow_color = Color.MEDIUM_VIOLET_RED
+	DebugArrowDrawer.draw_arrow_between(_global_position_at_frame_start, global_position, position_change_arrow_color, 0.1, 10.0)
+	# Draw arrows to show the individual move steps
+	var previous_arrow_start_position := _get_global_center_position()
+	for i in range(_debug_movement_steps_info.size() - 1, -1, -1):
+		var debug_info := _debug_movement_steps_info[i]
+		var arrow_direction := debug_info.move_direction as Vector3
+		var arrow_length := 0.055 + 4.0 * (debug_info.move_distance as float)
+		var arrow_color := MOVE_STEP_DEBUG_ARROW_COLORS[clampf(i, 0, MOVE_STEP_DEBUG_ARROW_COLORS.size())]
+		var arrow_end := previous_arrow_start_position
+		var arrow_start := arrow_end - arrow_length * arrow_direction
+		DebugArrowDrawer.draw_arrow_between_for_frames(arrow_start, arrow_end, arrow_color, 0.25, 1)
+		for collision in (debug_info.collisions as Array[Dictionary]):
+			var angle := rad_to_deg(arrow_direction.angle_to(collision.normal))
+			var offset := Vector3.ZERO
+			if angle < 15.0 or angle > 165.0:
+				offset = 0.01 * MathUtils.get_any_perpendicular_vector(arrow_direction)
+			DebugArrowDrawer.draw_arrow_for_frames(arrow_end + offset, 0.1 * collision.normal, arrow_color, 0.1, 1)
+			DebugArrowDrawer.draw_arrow_for_frames(collision.contact_position, 0.1 * collision.normal, arrow_color, 0.1, 1)
+		previous_arrow_start_position = arrow_start
 
 
 func _get_global_center_position() -> Vector3:

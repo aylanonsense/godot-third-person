@@ -37,20 +37,6 @@ spring_length = 3.0
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3)
 
-[node name="DebugLabel" type="Label3D" parent="LookYawPivot/LookPitchPivot"]
-unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0, 0)
-visible = false
-text = "speed=0.0
-hspeed=0.0
-vspeed=0.0
-x=0.0
-y=0.0
-z=0.0"
-font_size = 25
-outline_size = 5
-horizontal_alignment = 0
-
 [node name="FloorSnapEdgeCast" type="RayCast3D" parent="."]
 unique_name_in_owner = true
 enabled = false
