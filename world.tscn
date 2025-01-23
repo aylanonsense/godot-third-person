@@ -1,7 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://dau1hjriwgqw2"]
+[gd_scene load_steps=8 format=3 uid="uid://dau1hjriwgqw2"]
 
-[ext_resource type="PackedScene" uid="uid://csxholeufkeh5" path="res://player_character.tscn" id="1_r378l"]
+[ext_resource type="PackedScene" uid="uid://ds8d0xv78tht6" path="res://utils/free_look_camera.tscn" id="2_a8ua5"]
+[ext_resource type="PackedScene" uid="uid://csxholeufkeh5" path="res://player_character.tscn" id="2_at347"]
 [ext_resource type="PackedScene" uid="uid://s2ctfk2kgp7b" path="res://test_geometry.tscn" id="2_jp6cj"]
+[ext_resource type="PackedScene" uid="uid://c7bi0pgsgd4we" path="res://free_look_camera_switcher.tscn" id="4_8a8xu"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_s5f6h"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -24,7 +26,14 @@ transform = Transform3D(0.5, 0.75, -0.433013, 0, 0.5, 0.866025, 0.866025, -0.433
 light_energy = 0.3
 shadow_enabled = true
 
-[node name="PlayerCharacter" parent="." instance=ExtResource("1_r378l")]
-_max_floor_angle = 0.787143
-
 [node name="TestGeometry" parent="." instance=ExtResource("2_jp6cj")]
+
+[node name="PlayerCharacter" parent="." instance=ExtResource("2_at347")]
+
+[node name="FreeLookCamera" parent="." instance=ExtResource("2_a8ua5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="FreeLookCameraSwitcher" parent="." node_paths=PackedStringArray("player_character", "free_look_camera") instance=ExtResource("4_8a8xu")]
+player_character = NodePath("../PlayerCharacter")
+free_look_camera = NodePath("../FreeLookCamera")
+pause_on_toggle_free_look_on = true

@@ -19,15 +19,16 @@ const FLOOR_SNAP_EDGE_CHECK_DISTANCE := 0.01
 @export var _move_speed := 5.0
 @export var _mouse_look_sensitivity := 1.0
 @export var _jump_velocity := 10.0
-@export_range(0.0, 90.0, 0.001, "radians") var _max_floor_angle := 45.0 * PI / 180.0
-@export_range(0.0, 180.0, 0.001, "radians") var _min_wall_angle := 80.0 * PI / 180.0
-@export_range(0.0, 180.0, 0.001, "radians") var _max_wall_angle := 135.0 * PI / 180.0
+@export_range(0.0, 90.0, 0.001, "radians") var _max_floor_angle := deg_to_rad(45.0)
+@export_range(0.0, 180.0, 0.001, "radians") var _min_wall_angle := deg_to_rad(80.0)
+@export_range(0.0, 180.0, 0.001, "radians") var _max_wall_angle := deg_to_rad(135.0)
 
+@onready var camera := %Camera as Camera3D
 @onready var _collision_shape := %CollisionShape3D as CollisionShape3D
 @onready var _look_yaw_pivot := %LookYawPivot as Node3D
 @onready var _look_pitch_pivot := %LookPitchPivot as Node3D
 @onready var _floor_snap_edge_cast := %FloorSnapEdgeCast as RayCast3D
-@onready var _debug_label := %DebugLabel as Label3D
+#@onready var _debug_label := %DebugLabel as Label3D
 
 # Bases and vectors
 var _up: Vector3 # The character's up vector
@@ -67,7 +68,7 @@ func _ready() -> void:
 
 func _input(event: InputEvent) -> void:
 	# Use the mouse to look around
-	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
+	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED and camera.current:
 		var look_change := Vector2(event.relative.x, -event.relative.y) * _mouse_look_sensitivity # -x = look left / +x = look right / -y = look down / +y = look up
 		# Look left/right
 		_look_yaw_pivot.rotation_degrees.y -= look_change.x
@@ -91,7 +92,7 @@ func _physics_process(delta: float) -> void:
 		_was_previously_on_floor = false
 		_previous_floor_normal = Vector3.ZERO
 	# Check for jump
-	_just_jumped = _is_on_floor and Input.is_action_just_pressed("jump")
+	_just_jumped = _is_on_floor and Input.is_action_just_pressed("jump") and camera.current
 	if _just_jumped:
 		_is_on_floor = false
 		_floor_normal = Vector3.ZERO
@@ -100,7 +101,7 @@ func _physics_process(delta: float) -> void:
 	_calculate_and_set_bases_and_vectors()
 	# Apply move input to velocity
 	var move_percent := 0.10 if _is_on_floor else 0.01
-	var move_input := Input.get_vector("move_left", "move_right", "move_backward", "move_forward") # Max 1.0 length
+	var move_input := Input.get_vector("move_left", "move_right", "move_backward", "move_forward") if camera.current else Vector2.ZERO # Max 1.0 length
 	var move_basis_velocity := _inverse_move_basis * velocity # Velocity taking into account the slope of the floor (if grounded)
 	move_basis_velocity.x = lerpf(move_basis_velocity.x, _move_speed * move_input.x, move_percent)
 	move_basis_velocity.z = lerpf(move_basis_velocity.z, _move_speed * -move_input.y, move_percent)
@@ -286,14 +287,7 @@ func _draw_debug_info_and_arrows(previous_global_position: Vector3) -> void:
 	else:
 		color = Color.RED
 	DebugArrowDrawer.draw_arrow_between(previous_global_position, global_position, color, 0.5, 10.0)
-	var move_basis_velocity := _inverse_move_basis * velocity
-	_velocity_move_basis_x_debug_arrow.direction = _move_basis.x * MathUtils.sign_or_1(move_basis_velocity.x)
-	_velocity_move_basis_y_debug_arrow.direction = _move_basis.y * MathUtils.sign_or_1(move_basis_velocity.y)
-	_velocity_move_basis_z_debug_arrow.direction = _move_basis.z * MathUtils.sign_or_1(move_basis_velocity.z)
-	_velocity_move_basis_x_debug_arrow.length = 0.1 * abs(move_basis_velocity.x)
-	_velocity_move_basis_y_debug_arrow.length = 0.1 * abs(move_basis_velocity.y)
-	_velocity_move_basis_z_debug_arrow.length = 0.1 * abs(move_basis_velocity.z)
-	_velocity_move_basis_x_debug_arrow.visible = not is_zero_approx(move_basis_velocity.x)
-	_velocity_move_basis_y_debug_arrow.visible = not is_zero_approx(move_basis_velocity.y)
-	_velocity_move_basis_z_debug_arrow.visible = not is_zero_approx(move_basis_velocity.z)
-	_debug_label.text = "speed=%f\nhspeed=%f\nvspeed=%f\nx=%f\ny=%f\nz=%f" % [move_basis_velocity.length(), Vector3(move_basis_velocity.x, 0.0, move_basis_velocity.z).length(), absf(move_basis_velocity.y), move_basis_velocity.x, move_basis_velocity.y, move_basis_velocity.z]
+
+
+func _get_global_center_position() -> Vector3:
+	return global_position + 0.5 * _collider_height * _up

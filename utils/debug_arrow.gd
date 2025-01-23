@@ -30,6 +30,10 @@ const DEFAULT_TAIL_LENGTH := 0.8
 		if not Engine.is_editor_hint():
 			_needs_to_reset_death_timer = true
 			_try_resetting_death_timer()
+@export var frame_duration := -1:
+	set(value):
+		frame_duration = value
+		_frames_until_death = value
 @export var length := 1.0:
 	get:
 		if _needs_to_apply_length:
@@ -111,6 +115,7 @@ var _target_direction := Vector3.FORWARD
 var _needs_to_apply_color := false
 var _target_color := Color.WHITE
 var _needs_to_reset_death_timer := false
+var _frames_until_death := -1
 
 
 func _ready():
@@ -125,6 +130,13 @@ func _ready():
 
 func _process(_delta: float) -> void:
 	_refresh()
+
+
+func _physics_process(_delta: float) -> void:
+	if temporary and _frames_until_death >= 0:
+		_frames_until_death -= 1
+		if _frames_until_death <= 0:
+			queue_free()
 
 
 func _refresh() -> void:
@@ -209,4 +221,6 @@ func _on_death_timer_timeout() -> void:
 func _validate_property(property: Dictionary) -> void:
 	match property.name:
 		"duration":
+			property.usage = PROPERTY_USAGE_DEFAULT if temporary else PROPERTY_USAGE_NO_EDITOR
+		"frame_duration":
 			property.usage = PROPERTY_USAGE_DEFAULT if temporary else PROPERTY_USAGE_NO_EDITOR

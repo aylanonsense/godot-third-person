@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://utils/debug_arrow.gd" id="1_wj0un"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rfyv0"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7vcb2"]
 resource_local_to_scene = true
 shading_mode = 0
 disable_receive_shadows = true
@@ -27,7 +27,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
 [node name="HeadMesh" type="MeshInstance3D" parent="Head"]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0.1)
-material_override = SubResource("StandardMaterial3D_rfyv0")
+material_override = SubResource("StandardMaterial3D_7vcb2")
 cast_shadow = 0
 gi_mode = 0
 mesh = SubResource("CylinderMesh_pe05j")
@@ -39,7 +39,7 @@ unique_name_in_owner = true
 [node name="TailMesh" type="MeshInstance3D" parent="Tail"]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, -0.4)
-material_override = SubResource("StandardMaterial3D_rfyv0")
+material_override = SubResource("StandardMaterial3D_7vcb2")
 cast_shadow = 0
 gi_mode = 0
 mesh = SubResource("CylinderMesh_6gnth")

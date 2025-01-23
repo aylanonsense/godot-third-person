@@ -30,9 +30,17 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
 [node name="LookPitchPivot" type="Node3D" parent="LookYawPivot"]
 unique_name_in_owner = true
 
+[node name="SpringArm3D" type="SpringArm3D" parent="LookYawPivot/LookPitchPivot"]
+spring_length = 3.0
+
+[node name="Camera" type="Camera3D" parent="LookYawPivot/LookPitchPivot/SpringArm3D"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3)
+
 [node name="DebugLabel" type="Label3D" parent="LookYawPivot/LookPitchPivot"]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0, 0)
+visible = false
 text = "speed=0.0
 hspeed=0.0
 vspeed=0.0
@@ -43,15 +51,8 @@ font_size = 25
 outline_size = 5
 horizontal_alignment = 0
 
-[node name="SpringArm3D" type="SpringArm3D" parent="LookYawPivot/LookPitchPivot"]
-spring_length = 3.0
-
-[node name="Camera3D" type="Camera3D" parent="LookYawPivot/LookPitchPivot/SpringArm3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3)
-
 [node name="FloorSnapEdgeCast" type="RayCast3D" parent="."]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 enabled = false
 target_position = Vector3(0, -0.2, 0)
 hit_back_faces = false
