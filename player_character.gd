@@ -13,22 +13,24 @@ enum CollisionSurfaceType {
 
 const MAX_MOVE_STEPS_PER_FRAME := 6
 const COLLISION_SURFACE_SEPARATION_DISTANCE := 0.0001
+const MIN_DISTANCE_TO_UPDATE_MOVEMENT_DIRECTION = 0.01
 const FLOOR_SNAP_MOVE_DISTANCE := 0.1
-const FLOOR_SNAP_EDGE_CHECK_DISTANCE := 0.01
+const SURFACE_EDGE_CHECK_SCOOT_DISTANCE := 0.01
+const MAX_CREVASSE_ANGLE := deg_to_rad(91.0) # Crevasses with too shallow of an angle don't count (180 = flat surfaces count as crevasses, 90 = a ditch with a right angle at the bottom, 0.1 = only allow super steep crevasse)
 const MOVE_STEP_DEBUG_ARROW_COLORS: Array[Color] = [Color.RED, Color.ORANGE, Color.YELLOW, Color.GREEN, Color.BLUE, Color.PURPLE, Color.MAGENTA]
 
 @export var _move_speed := 5.0
 @export var _mouse_look_sensitivity := 1.0
-@export var _jump_velocity := 10.0
-@export_range(0.0, 90.0, 0.001, "radians") var _max_floor_angle := deg_to_rad(45.0)
-@export_range(0.0, 180.0, 0.001, "radians") var _min_wall_angle := deg_to_rad(80.0)
-@export_range(0.0, 180.0, 0.001, "radians") var _max_wall_angle := deg_to_rad(135.0)
+@export var _jump_velocity := 5.0
+@export_range(0.0, 90.0, 0.001, "radians") var _max_floor_angle := deg_to_rad(51.0)
+@export_range(0.0, 180.0, 0.001, "radians") var _min_wall_angle := deg_to_rad(69.0)
+@export_range(0.0, 180.0, 0.001, "radians") var _max_wall_angle := deg_to_rad(131.0)
 
-@onready var camera := %Camera as Camera3D
-@onready var _collision_shape := %CollisionShape3D as CollisionShape3D
-@onready var _look_yaw_pivot := %LookYawPivot as Node3D
-@onready var _look_pitch_pivot := %LookPitchPivot as Node3D
-@onready var _floor_snap_edge_cast := %FloorSnapEdgeCast as RayCast3D
+@onready var camera: Camera3D = %Camera
+@onready var _collision_shape: CollisionShape3D = %CollisionShape3D
+@onready var _look_yaw_pivot: Node3D = %LookYawPivot
+@onready var _look_pitch_pivot: Node3D = %LookPitchPivot
+@onready var _surface_edge_ray_cast: SurfaceEdgeRayCast = %SurfaceEdgeRayCast
 
 # Bases and vectors
 var _up: Vector3 # The character's up vector
@@ -40,7 +42,7 @@ var _collider_height: float
 
 # State
 var _just_jumped := false
-var _last_move_step_direction := Vector3.FORWARD
+var _last_planar_movement_direction := Vector3.FORWARD
 
 # Floor state
 var _is_on_floor := false
@@ -51,7 +53,7 @@ var _was_previously_on_floor := false
 var _previous_floor_normal: Vector3
 
 # Debug
-var _global_position_at_frame_start: Vector3
+@onready var _previous_debug_position := global_position
 var _debug_movement_steps_info := [] as Array[Dictionary]
 
 
@@ -72,7 +74,6 @@ func _input(event: InputEvent) -> void:
 
 func _physics_process(delta: float) -> void:
 	# Reset debug information
-	_global_position_at_frame_start = global_position
 	_debug_movement_steps_info.clear()
 	# If we found a floor last frame, we reuse it for the time being as our current floor
 	_was_on_floor_last_frame = _is_on_floor
@@ -132,11 +133,14 @@ func _calculate_and_set_bases_and_vectors() -> void:
 
 
 func _move_in_multiple_steps(movement: Vector3) -> void:
+	var upward_facing_normals: Array[Vector3] = []
+	var planar_movement := MathUtils.project_vector_onto_plane(movement, _up)
+	if planar_movement.length() > MIN_DISTANCE_TO_UPDATE_MOVEMENT_DIRECTION:
+		_last_planar_movement_direction = planar_movement.normalized()
 	for step_index in range(MAX_MOVE_STEPS_PER_FRAME):
 		# Stop when we're out of movement
 		if movement.is_zero_approx():
 			break
-		_last_move_step_direction = movement.normalized()
 		# Record debug info for drawing arrows
 		var _debug_info := {
 			move_direction = movement.normalized(),
@@ -164,6 +168,11 @@ func _move_in_multiple_steps(movement: Vector3) -> void:
 			var is_movement_towards_surface := collision_movement_dot_product <= 0.0
 			var collision_velocity_dot_product := collision_normal.dot(velocity) # Positive if velocity is away from the surface
 			var is_velocity_towards_surface := collision_velocity_dot_product <= 0.0
+			# Keep track of upward-facing normals
+			if collision_normal.dot(_up) > 0.0:
+				upward_facing_normals.append(collision_normal)
+			# Check collision type, just for debug purposes right now
+			_surface_edge_ray_cast.check_collision_type(collision_contact_position, collision_normal, MathUtils.project_vector_onto_plane(_last_planar_movement_direction, _up).normalized(), _up)
 			# Figure out what type of surface this is, mostly based on the angle of collision
 			if collision_angle <= _max_floor_angle and height_of_collision <= 0.5 * _collider_height:
 				collision_surface_type = CollisionSurfaceType.FLOOR
@@ -217,6 +226,26 @@ func _move_in_multiple_steps(movement: Vector3) -> void:
 			})
 		# Continue with the remaining movement
 		movement = movement_remaining
+	# If we don't have a floor, we could be standing in a crevasse
+	if (not _is_on_floor or _reused_floor_from_last_frame) and upward_facing_normals.size() >= 2:
+		for i in range(upward_facing_normals.size()):
+			for j in range(i + 1, upward_facing_normals.size()):
+				# If we find two normals pointing towards one another, we pretend there's a floor
+				if upward_facing_normals[i].angle_to(upward_facing_normals[j]) >= PI - MAX_CREVASSE_ANGLE:
+					var collision_normal := _up
+					_was_previously_on_floor = _is_on_floor
+					_previous_floor_normal = _floor_normal
+					_is_on_floor = true
+					_floor_normal = collision_normal
+					_reused_floor_from_last_frame = false
+					var collision_velocity_dot_product := collision_normal.dot(velocity) # Positive if velocity is away from the surface
+					var is_velocity_towards_surface := collision_velocity_dot_product <= 0.0
+					if is_velocity_towards_surface:
+						var velocity_towards_surface := collision_velocity_dot_product * collision_normal
+						velocity -= velocity_towards_surface
+					break
+			if _is_on_floor and not _reused_floor_from_last_frame:
+				break
 
 
 func _snap_to_floor() -> void:
@@ -244,21 +273,16 @@ func _snap_to_floor() -> void:
 		var collision_angle := collision_normal.angle_to(_up)
 		var vector_from_feet_to_collision := collision_contact_position - global_position
 		var height_of_collision := vector_from_feet_to_collision.dot(_up)
+		# Check if we've moved off of a cliff
+		_surface_edge_ray_cast.check_collision_type(collision_contact_position, collision_normal, MathUtils.project_vector_onto_plane(_last_planar_movement_direction, _up).normalized(), _up)
+		if _surface_edge_ray_cast.is_edge_of_cliff():
+			continue
+		# TODO consider using the surface that SurfaceEdgeRayCast found as the floor normal
 		# Check if this surface could qualify as a floor
 		if not (collision_angle <= _max_floor_angle and height_of_collision <= 0.5 * _collider_height):
 			continue
-		# Check if this surface is an edge that we're falling off of
-		var original_floor_snap_edge_cast_position := _floor_snap_edge_cast.global_position
-		var floor_snap_edge_cast_vector := MathUtils.to_global_direction(_floor_snap_edge_cast, _floor_snap_edge_cast.target_position)
-		var floor_snap_edge_cast_forward_start_position := collision_contact_position - 0.5 * floor_snap_edge_cast_vector + FLOOR_SNAP_EDGE_CHECK_DISTANCE * _last_move_step_direction
-		_floor_snap_edge_cast.global_position = floor_snap_edge_cast_forward_start_position
-		_floor_snap_edge_cast.force_raycast_update()
-		_floor_snap_edge_cast.global_position = original_floor_snap_edge_cast_position
-		# If no surface could be found a little bit forward, it means we moved off of a cliff and shouldn't snap to the edge
-		if not _floor_snap_edge_cast.is_colliding():
-			continue
 		# If the surface a little bit forward isn't horizontal enough to qualify as a floor, it means we moved off of a cliff
-		var floor_edge_cast_normal := _floor_snap_edge_cast.get_collision_normal()
+		var floor_edge_cast_normal := _surface_edge_ray_cast.get_collision_normal()
 		var floor_edge_cast_angle := floor_edge_cast_normal.angle_to(_up)
 		if not (floor_edge_cast_angle <= _max_floor_angle):
 			continue
@@ -291,7 +315,14 @@ func _snap_to_floor() -> void:
 		break
 	# Undo the movement if we didn't find any floor
 	if not _is_on_floor or _reused_floor_from_last_frame:
-		move_and_collide(-collision_info.get_travel())
+		var undo_movement := -collision_info.get_travel()
+		var collision_info_2 := move_and_collide(undo_movement)
+		var _debug_info_2 := {
+			move_direction = -movement.normalized(),
+			move_distance = undo_movement.length() if not collision_info_2 else collision_info_2.get_travel().length(),
+			collisions = []
+		}
+		_debug_movement_steps_info.append(_debug_info_2)
 
 
 func _draw_debug_info_and_arrows() -> void:
@@ -303,7 +334,9 @@ func _draw_debug_info_and_arrows() -> void:
 		position_change_arrow_color = Color.MIDNIGHT_BLUE
 	else:
 		position_change_arrow_color = Color.MEDIUM_VIOLET_RED
-	DebugArrowDrawer.draw_arrow_between(_global_position_at_frame_start, global_position, position_change_arrow_color, 0.1, 10.0)
+	var new_debug_position = global_position + 0.05 * _up
+	DebugArrowDrawer.draw_arrow_between(_previous_debug_position, new_debug_position, position_change_arrow_color, 0.1, 5.0)
+	_previous_debug_position = new_debug_position
 	# Draw arrows to show the individual move steps
 	var previous_arrow_start_position := _get_global_center_position()
 	for i in range(_debug_movement_steps_info.size() - 1, -1, -1):
@@ -322,6 +355,7 @@ func _draw_debug_info_and_arrows() -> void:
 			DebugArrowDrawer.draw_arrow_for_frames(arrow_end + offset, 0.1 * collision.normal, arrow_color, 0.1, 1)
 			DebugArrowDrawer.draw_arrow_for_frames(collision.contact_position, 0.1 * collision.normal, arrow_color, 0.1, 1)
 		previous_arrow_start_position = arrow_start
+	DebugArrowDrawer.draw_arrow_for_frames(global_position + (_collider_height + 0.1) * _up, 0.15 * _last_planar_movement_direction, Color.BLACK, 1.0, 1)
 
 
 func _get_global_center_position() -> Vector3:

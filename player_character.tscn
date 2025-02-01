@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://csxholeufkeh5"]
+[gd_scene load_steps=6 format=3 uid="uid://csxholeufkeh5"]
 
 [ext_resource type="Script" path="res://player_character.gd" id="1_ksgeo"]
+[ext_resource type="Script" path="res://utils/surface_edge_ray_cast.gd" id="2_lxs2o"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_srpk8"]
 radius = 0.24
@@ -31,17 +32,23 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
 unique_name_in_owner = true
 
 [node name="SpringArm3D" type="SpringArm3D" parent="LookYawPivot/LookPitchPivot"]
-spring_length = 3.0
+spring_length = 1.5
 
 [node name="Camera" type="Camera3D" parent="LookYawPivot/LookPitchPivot/SpringArm3D"]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3)
 
-[node name="FloorSnapEdgeCast" type="RayCast3D" parent="."]
+[node name="SurfaceEdgeRayCast" type="RayCast3D" parent="." node_paths=PackedStringArray("step_up_height_target")]
 unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.64, 0)
 enabled = false
-target_position = Vector3(0, -0.2, 0)
+target_position = Vector3(0, -0.9, 0)
 hit_back_faces = false
+script = ExtResource("2_lxs2o")
+step_up_height_target = NodePath("../StepUpHeightTarget")
+draw_debug_arrows = true
+
+[node name="StepUpHeightTarget" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.24, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.49, 0)

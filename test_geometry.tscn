@@ -1420,7 +1420,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 0, 4)
 [node name="BlockyBumpGroup1" type="Node3D" parent="BlockyBumps"]
 
 [node name="Label" type="Label3D" parent="BlockyBumps/BlockyBumpGroup1"]
-transform = Transform3D(-1, 6.35732e-08, -8.74228e-08, -8.74228e-08, -2.98023e-08, 1, 6.35732e-08, 1, 2.98023e-08, 0.25, 0.00100008, -0.25)
+transform = Transform3D(-1, 6.35732e-08, -8.74228e-08, -8.74228e-08, -2.98023e-08, 1, 6.35732e-08, 1, 2.98023e-08, 0, 0.001, -0.25)
 shaded = true
 text = "5°"
 font_size = 60
@@ -1484,7 +1484,7 @@ size = Vector3(4, 1, 1)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6)
 
 [node name="Label" type="Label3D" parent="BlockyBumps/BlockyBumpGroup2"]
-transform = Transform3D(-1, 6.35732e-08, -8.74228e-08, -8.74228e-08, -2.98023e-08, 1, 6.35732e-08, 1, 2.98023e-08, 0.25, 0.00100008, -0.25)
+transform = Transform3D(-1, 6.35732e-08, -8.74228e-08, -8.74228e-08, -2.98023e-08, 1, 6.35732e-08, 1, 2.98023e-08, 0, 0.001, -0.25)
 shaded = true
 text = "15°"
 font_size = 60
@@ -1548,7 +1548,7 @@ size = Vector3(4, 1, 1)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 12)
 
 [node name="Label" type="Label3D" parent="BlockyBumps/BlockyBumpGroup3"]
-transform = Transform3D(-1, 6.35732e-08, -8.74228e-08, -8.74228e-08, -2.98023e-08, 1, 6.35732e-08, 1, 2.98023e-08, 0.25, 0.00100008, -0.25)
+transform = Transform3D(-1, 6.35732e-08, -8.74228e-08, -8.74228e-08, -2.98023e-08, 1, 6.35732e-08, 1, 2.98023e-08, 0, 0.001, -0.25)
 shaded = true
 text = "30°"
 font_size = 60
@@ -1612,7 +1612,7 @@ size = Vector3(4, 1, 1)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 18)
 
 [node name="Label" type="Label3D" parent="BlockyBumps/BlockyBumpGroup4"]
-transform = Transform3D(-1, 6.35732e-08, -8.74228e-08, -8.74228e-08, -2.98023e-08, 1, 6.35732e-08, 1, 2.98023e-08, 0.25, 0.00100008, -0.25)
+transform = Transform3D(-1, 6.35732e-08, -8.74228e-08, -8.74228e-08, -2.98023e-08, 1, 6.35732e-08, 1, 2.98023e-08, 0, 0.001, -0.25)
 shaded = true
 text = "45°"
 font_size = 60
@@ -1635,3 +1635,165 @@ transform = Transform3D(1, 0, 0, 0, 0.707107, -0.707107, 0, 0.707107, 0.707107, 
 material_override = ExtResource("1_7tch0")
 use_collision = true
 size = Vector3(4, 1, 1)
+
+[node name="Crevasses" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 0, 4)
+
+[node name="Crevasse1" type="Node3D" parent="Crevasses"]
+
+[node name="Label" type="Label3D" parent="Crevasses/Crevasse1"]
+transform = Transform3D(-1, 6.35732e-08, -8.74228e-08, -8.74228e-08, -2.98023e-08, 1, 6.35732e-08, 1, 2.98023e-08, 0, 2.001, 0.5)
+shaded = true
+text = "45°"
+font_size = 60
+outline_size = 5
+
+[node name="Wall1" type="CSGBox3D" parent="Crevasses/Crevasse1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0.5)
+material_override = ExtResource("1_7tch0")
+use_collision = true
+size = Vector3(4, 2, 1)
+
+[node name="Wall2" type="CSGBox3D" parent="Crevasses/Crevasse1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 2.5)
+material_override = ExtResource("1_7tch0")
+use_collision = true
+size = Vector3(4, 2, 1)
+
+[node name="Dip1Pivot" type="Node3D" parent="Crevasses/Crevasse1"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, -0.0022316, 1.99611, 1.00024)
+
+[node name="Dip" type="CSGBox3D" parent="Crevasses/Crevasse1/Dip1Pivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, -0.5)
+material_override = ExtResource("1_7tch0")
+use_collision = true
+size = Vector3(3.5, 3, 1)
+
+[node name="Dip1Pivot2" type="Node3D" parent="Crevasses/Crevasse1"]
+transform = Transform3D(-1, -6.18172e-08, 6.18172e-08, 0, 0.707107, 0.707107, -8.74228e-08, 0.707107, -0.707107, 0, 2, 2)
+
+[node name="Dip" type="CSGBox3D" parent="Crevasses/Crevasse1/Dip1Pivot2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, -0.5)
+material_override = ExtResource("1_7tch0")
+use_collision = true
+size = Vector3(3.5, 3, 1)
+
+[node name="Crevasse2" type="Node3D" parent="Crevasses"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
+
+[node name="Label" type="Label3D" parent="Crevasses/Crevasse2"]
+transform = Transform3D(-1, 1.50996e-07, 6.60024e-15, 0, -4.37114e-08, 1, 1.50996e-07, 1, 4.37114e-08, 0, 2.001, 0.5)
+shaded = true
+text = "60°"
+font_size = 60
+outline_size = 5
+
+[node name="Wall1" type="CSGBox3D" parent="Crevasses/Crevasse2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0.5)
+material_override = ExtResource("1_7tch0")
+use_collision = true
+size = Vector3(4, 2, 1)
+
+[node name="Wall2" type="CSGBox3D" parent="Crevasses/Crevasse2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 2.5)
+material_override = ExtResource("1_7tch0")
+use_collision = true
+size = Vector3(4, 2, 1)
+
+[node name="Dip1Pivot" type="Node3D" parent="Crevasses/Crevasse2"]
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 2, 1)
+
+[node name="Dip" type="CSGBox3D" parent="Crevasses/Crevasse2/Dip1Pivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, -0.5)
+material_override = ExtResource("1_7tch0")
+use_collision = true
+size = Vector3(3.5, 3, 1)
+
+[node name="Dip1Pivot2" type="Node3D" parent="Crevasses/Crevasse2"]
+transform = Transform3D(-1, 4.37114e-08, -7.57103e-08, 0, 0.866025, 0.5, 8.74228e-08, 0.5, -0.866025, 0, 2, 2)
+
+[node name="Dip" type="CSGBox3D" parent="Crevasses/Crevasse2/Dip1Pivot2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, -0.5)
+material_override = ExtResource("1_7tch0")
+use_collision = true
+size = Vector3(3.5, 3, 1)
+
+[node name="Crevasse3" type="Node3D" parent="Crevasses"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8)
+
+[node name="Label" type="Label3D" parent="Crevasses/Crevasse3"]
+transform = Transform3D(-1, 6.35732e-08, -8.74228e-08, -8.74228e-08, -2.98023e-08, 1, 6.35732e-08, 1, 2.98023e-08, 0, 2.001, 0.5)
+shaded = true
+text = "70°"
+font_size = 60
+outline_size = 5
+
+[node name="Wall1" type="CSGBox3D" parent="Crevasses/Crevasse3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0.5)
+material_override = ExtResource("1_7tch0")
+use_collision = true
+size = Vector3(4, 2, 1)
+
+[node name="Wall2" type="CSGBox3D" parent="Crevasses/Crevasse3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 2.5)
+material_override = ExtResource("1_7tch0")
+use_collision = true
+size = Vector3(4, 2, 1)
+
+[node name="Dip1Pivot" type="Node3D" parent="Crevasses/Crevasse3"]
+transform = Transform3D(1, 0, 0, 0, 0.939693, 0.34202, 0, -0.34202, 0.939693, 0, 2, 1)
+
+[node name="Dip" type="CSGBox3D" parent="Crevasses/Crevasse3/Dip1Pivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, -0.5)
+material_override = ExtResource("1_7tch0")
+use_collision = true
+size = Vector3(3.5, 3, 1)
+
+[node name="Dip1Pivot2" type="Node3D" parent="Crevasses/Crevasse3"]
+transform = Transform3D(-1, -2.99003e-08, 8.21505e-08, 0, 0.939693, 0.34202, -8.74228e-08, 0.34202, -0.939693, 0, 2, 2)
+
+[node name="Dip" type="CSGBox3D" parent="Crevasses/Crevasse3/Dip1Pivot2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, -0.5)
+material_override = ExtResource("1_7tch0")
+use_collision = true
+size = Vector3(3.5, 3, 1)
+
+[node name="Crevasse4" type="Node3D" parent="Crevasses"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 12)
+
+[node name="Label" type="Label3D" parent="Crevasses/Crevasse4"]
+transform = Transform3D(-1, 6.35732e-08, -8.74228e-08, -8.74228e-08, -2.98023e-08, 1, 6.35732e-08, 1, 2.98023e-08, 0, 2.001, 0.5)
+shaded = true
+text = "80°"
+font_size = 60
+outline_size = 5
+
+[node name="Wall1" type="CSGBox3D" parent="Crevasses/Crevasse4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0.5)
+material_override = ExtResource("1_7tch0")
+use_collision = true
+size = Vector3(4, 2, 1)
+
+[node name="Wall2" type="CSGBox3D" parent="Crevasses/Crevasse4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 2.5)
+material_override = ExtResource("1_7tch0")
+use_collision = true
+size = Vector3(4, 2, 1)
+
+[node name="Dip1Pivot" type="Node3D" parent="Crevasses/Crevasse4"]
+transform = Transform3D(1, 0, 0, 0, 0.984808, 0.173648, 0, -0.173648, 0.984808, 0, 2, 1)
+
+[node name="Dip" type="CSGBox3D" parent="Crevasses/Crevasse4/Dip1Pivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, -0.5)
+material_override = ExtResource("1_7tch0")
+use_collision = true
+size = Vector3(3.5, 3, 1)
+
+[node name="Dip1Pivot2" type="Node3D" parent="Crevasses/Crevasse4"]
+transform = Transform3D(-1, -1.51808e-08, 8.60946e-08, 0, 0.984808, 0.173648, -8.74228e-08, 0.173648, -0.984808, 0, 2, 2)
+
+[node name="Dip" type="CSGBox3D" parent="Crevasses/Crevasse4/Dip1Pivot2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, -0.5)
+material_override = ExtResource("1_7tch0")
+use_collision = true
+size = Vector3(3.5, 3, 1)

@@ -26,17 +26,17 @@ static func project_vector_onto_plane(vector: Vector3, plane_normal: Vector3) ->
 	return vector - vector.project(plane_normal)
 
 
-static func to_global_direction(node: Node3D, local_direction: Vector3) -> Vector3:
+static func to_global_direction(local_direction: Vector3, node: Node3D) -> Vector3:
 	return node.to_global(local_direction) - node.global_position
 
 
-static func to_local_direction(node: Node3D, global_direction: Vector3) -> Vector3:
+static func to_local_direction(global_direction: Vector3, node: Node3D) -> Vector3:
 	return node.to_local(node.global_position + global_direction)
 
 
 static func get_any_perpendicular_vector(vector: Vector3) -> Vector3:
 	var angle_to_up := vector.angle_to(Vector3.UP)
 	if angle_to_up < 15.0 or angle_to_up > 165.0:
-		return vector.cross(Vector3.FORWARD)
+		return vector.cross(Vector3.FORWARD).normalized()
 	else:
-		return vector.cross(Vector3.UP)
+		return vector.cross(Vector3.UP).normalized()
