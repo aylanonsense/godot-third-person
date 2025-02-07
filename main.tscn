@@ -1,7 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://cm50077b4idx8"]
+[gd_scene load_steps=3 format=3 uid="uid://cm50077b4idx8"]
 
 [ext_resource type="PackedScene" uid="uid://dau1hjriwgqw2" path="res://world.tscn" id="1_xwfw3"]
+[ext_resource type="PackedScene" uid="uid://ds8d0xv78tht6" path="res://utils/free_look_camera/free_look_camera.tscn" id="2_fvuf8"]
 
 [node name="Main" type="Node"]
 
 [node name="World" parent="." instance=ExtResource("1_xwfw3")]
+
+[node name="FreeLookCamera" parent="." instance=ExtResource("2_fvuf8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)

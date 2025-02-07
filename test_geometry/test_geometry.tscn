@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://s2ctfk2kgp7b"]
 
-[ext_resource type="Material" uid="uid://bhhdcyyq7wud8" path="res://test_grid.tres" id="1_7tch0"]
+[ext_resource type="Material" uid="uid://bhhdcyyq7wud8" path="res://test_geometry/test_geometry.tres" id="1_7tch0"]
 
 [node name="TestGeometry" type="Node3D"]
 

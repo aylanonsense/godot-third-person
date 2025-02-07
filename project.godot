@@ -16,10 +16,10 @@ config/features=PackedStringArray("4.3", "GL Compatibility")
 
 [autoload]
 
-DebugArrowDrawer="*res://utils/debug_arrow_drawer.tscn"
-Quitter="*res://utils/quitter.tscn"
-MouseLockManager="*res://utils/mouse_lock_manager.tscn"
-FrameByFrameManager="*res://utils/frame_by_frame_manager.tscn"
+DebugArrowDrawer="*res://utils/debug_arrow/debug_arrow_drawer.tscn"
+Quitter="*res://utils/quitter/quitter.tscn"
+MouseLockManager="*res://utils/mouse_lock_manager/mouse_lock_manager.tscn"
+FrameStepper="*res://utils/frame_stepper/frame_stepper.tscn"
 
 [debug]
 

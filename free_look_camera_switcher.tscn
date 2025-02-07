@@ -1,7 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://c7bi0pgsgd4we"]
-
-[ext_resource type="Script" path="res://free_look_camera_switcher.gd" id="1_5666v"]
-
-[node name="FreeLookCameraSwitcher" type="Node"]
-process_mode = 3
-script = ExtResource("1_5666v")

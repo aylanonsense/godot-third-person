@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bycgeajja2sd0"]
 
-[ext_resource type="Script" path="res://utils/mouse_lock_manager.gd" id="1_pll26"]
+[ext_resource type="Script" path="res://utils/mouse_lock_manager/mouse_lock_manager.gd" id="1_pll26"]
 
 [node name="MouseLockManager" type="Node"]
 process_mode = 3

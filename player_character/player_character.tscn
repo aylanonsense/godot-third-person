@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://csxholeufkeh5"]
 
-[ext_resource type="Script" path="res://player_character.gd" id="1_ksgeo"]
-[ext_resource type="Script" path="res://utils/surface_edge_ray_cast.gd" id="2_lxs2o"]
+[ext_resource type="Script" path="res://player_character/player_character.gd" id="1_ksgeo"]
+[ext_resource type="Script" path="res://player_character/surface_edge_ray_cast.gd" id="2_lxs2o"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_srpk8"]
 radius = 0.24
