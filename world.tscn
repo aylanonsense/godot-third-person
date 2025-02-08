@@ -1,29 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://dau1hjriwgqw2"]
+[gd_scene load_steps=3 format=3 uid="uid://dau1hjriwgqw2"]
 
 [ext_resource type="PackedScene" uid="uid://csxholeufkeh5" path="res://player_character/player_character.tscn" id="2_at347"]
-[ext_resource type="PackedScene" uid="uid://s2ctfk2kgp7b" path="res://test_geometry/test_geometry.tscn" id="2_jp6cj"]
-
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_s5f6h"]
-sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
-ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
-
-[sub_resource type="Sky" id="Sky_80ybl"]
-sky_material = SubResource("ProceduralSkyMaterial_s5f6h")
-
-[sub_resource type="Environment" id="Environment_4qa8v"]
-sky = SubResource("Sky_80ybl")
-tonemap_mode = 2
+[ext_resource type="PackedScene" uid="uid://cjggwaqtuhssr" path="res://levels/asset_showcase_level/asset_showcase_level.tscn" id="2_h3bb5"]
 
 [node name="World" type="Node3D"]
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_4qa8v")
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.5, 0.75, -0.433013, 0, 0.5, 0.866025, 0.866025, -0.433013, 0.25, 0, 10, 0)
-light_energy = 0.3
-shadow_enabled = true
-
-[node name="TestGeometry" parent="." instance=ExtResource("2_jp6cj")]
-
 [node name="PlayerCharacter" parent="." instance=ExtResource("2_at347")]
+
+[node name="AssetShowcase" parent="." instance=ExtResource("2_h3bb5")]

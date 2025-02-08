@@ -1,0 +1,69 @@
+[gd_scene load_steps=10 format=3 uid="uid://cjggwaqtuhssr"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_31tyd"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_bqewo"]
+sky_material = SubResource("ProceduralSkyMaterial_31tyd")
+
+[sub_resource type="Environment" id="Environment_lr6un"]
+background_mode = 2
+sky = SubResource("Sky_bqewo")
+tonemap_mode = 2
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_p3om8"]
+size = Vector3(100, 1, 100)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_o6ahn"]
+size = Vector2(100, 100)
+
+[sub_resource type="BoxMesh" id="BoxMesh_4juk0"]
+size = Vector3(0.6, 0.6, 0.6)
+
+[sub_resource type="BoxMesh" id="BoxMesh_yeko5"]
+size = Vector3(0.3, 0.16, 0.2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_vacox"]
+size = Vector3(0.1, 0.18, 0.1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_yxw41"]
+top_radius = 0.05
+bottom_radius = 0.1
+height = 0.7
+
+[node name="AssetShowcase" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_lr6un")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 10, 0)
+light_energy = 0.3
+shadow_enabled = true
+
+[node name="Ground" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+shape = SubResource("BoxShape3D_p3om8")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground"]
+mesh = SubResource("PlaneMesh_o6ahn")
+
+[node name="HouseMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.525283, 0.3, -0.771797)
+mesh = SubResource("BoxMesh_4juk0")
+
+[node name="CarMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.08, -0.908)
+mesh = SubResource("BoxMesh_yeko5")
+
+[node name="PersonMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.041371, 0.0900001, -0.653247)
+mesh = SubResource("BoxMesh_vacox")
+
+[node name="TreeMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.029, 0.35, -1.395)
+mesh = SubResource("CylinderMesh_yxw41")
+skeleton = NodePath("../CarMesh")
